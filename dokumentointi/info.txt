@@ -1,0 +1,5 @@
+aiheenKuvausJaRakenne.pdf
+testausdokumentti.pdf
+käyttöohjeet.pdf
+tuntikirjanpito.txt
+luokka- ja sekvenssikaaviot
