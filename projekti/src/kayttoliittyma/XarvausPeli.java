@@ -5,8 +5,7 @@ import logiikka.Pelilauta;
 
 public class XarvausPeli {
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+       // TEST TEST 
         Pelilauta p = new Pelilauta();
         String testi ="1\n0\ntest\n2test";
         
@@ -14,7 +13,6 @@ public class XarvausPeli {
         
         p.lueJaTulosta(lukija);
         
-        System.out.println(p.toString());
            }
 }
     
