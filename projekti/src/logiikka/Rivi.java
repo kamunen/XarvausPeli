@@ -1,0 +1,106 @@
+package logiikka;
+
+public class Rivi {
+    private int[] arvaus;
+    private char[] tulos;
+    private int oikeinLkm;
+    private int mukanaLkm;
+    
+    public static final char LOYDETTY = 'X';
+    public static final char  MUKANA= 'Z';
+    public static final char TYHJA='-';
+   
+    
+    public Rivi(){}
+    
+    public int[] getArvaus() {
+        return arvaus;
+    }
+
+    public void setArvaus(int[] arvaus) {
+        this.arvaus = arvaus;
+        this.tulos = new char[arvaus.length];
+        
+        for (int i = 0; i < arvaus.length; i++) {
+            tulos[i]=TYHJA;
+        }
+        oikeinLkm=0;
+        mukanaLkm=0;
+    }
+
+    public char[] getTarkistus() {
+        return tulos;
+    }
+
+    public void setTarkistus(char[] tarkistus) {
+        this.tulos = tarkistus;
+    }
+    
+    public int getOikeinLkm() {
+        return oikeinLkm;
+    }
+
+    public int getMukanaLkm() {
+        return mukanaLkm;
+    }
+
+    //Luokanpalvelut
+    
+    public boolean onkoArvattu(){
+        if (getOikeinLkm()==arvaus.length){return true;}
+        return false;
+    }
+    
+     public void tarkista(int[] koodi){
+        
+        //Lasketaan koodissa olevien lukujen kappalemäärä
+        
+        int[] lkm = new int[10];
+        for (int i = 0; i < koodi.length; i++) {
+            lkm[koodi[i]]++;
+        }
+       
+        //Tarkistetaan oikealla paikalla olevat
+        for (int i = 0; i < koodi.length; i++) {
+            if(koodi[i]==arvaus[i]){
+                tulos[i]=LOYDETTY;
+                lkm[koodi[i]]--;
+                oikeinLkm++;
+            }
+         
+        }
+        //Etsitään ne, jotka eivät ole oikealla paikalla
+        
+        for (int i = 0; i < koodi.length; i++) {
+            if (tulos[i]==LOYDETTY ){continue;}
+            for (int j = 0; j < arvaus.length; j++) {
+                if(koodi[j]==arvaus[i] && lkm[koodi[j]]>0){
+                    tulos[i]=MUKANA;
+                    lkm[koodi[j]]--;
+                    mukanaLkm++;
+                    break;
+                }
+            }
+        }
+       }
+    
+    
+    @Override
+   public String toString(){
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i : arvaus) {
+            sb.append(i);
+        }
+        sb.append("\t");
+        
+        for (char c : tulos) {
+            sb.append(c);
+        }
+        
+        return sb.toString();
+       
+   } 
+
+}
