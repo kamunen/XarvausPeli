@@ -37,6 +37,10 @@ public class Pelilauta implements java.io.Serializable{
         return onkoRatkaistu;
     }
     
+    public int getRivajaJaljella(){
+        return rivejaJaljella;
+    }
+    
     public void generoiKoodi(){
         //TODO : Koodin arvonta
     }

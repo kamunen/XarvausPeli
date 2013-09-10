@@ -1,3 +1,5 @@
+package logiikka;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -18,6 +20,7 @@ import static org.junit.Assert.*;
 public class RiviTest {
     
     Rivi r;
+    int[] koodi = {0,1,2,3,4,5};
     
     public RiviTest() {
     }
@@ -33,26 +36,18 @@ public class RiviTest {
     @Before
     public void setUp() {
         
-        // Luodaan uusi rivi ja asetetaan arvaus
+        // Luodaan uusi rivi 
         r = new Rivi();
-        
-         
-         
-       
-        
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+   
      @Test
      public void RivinAsettaminenLuoTyhjanTulostaulun(){
          
-         int[] arvaus = {1,1,1,1,1,1};
-         r.setArvaus(arvaus);
+         r.setArvaus(koodi);
          
         StringBuilder tulos = new StringBuilder();
         tulos.append(r.getTarkistus());
@@ -63,23 +58,47 @@ public class RiviTest {
      @Test
      public void KoodinRatkaisuAntaaTulostaulunOK(){
          
-         int[] arvaus = {1,1,1,1,1,1};
-         
-         r.setArvaus(arvaus);
-         r.tarkista(arvaus);
+         r.setArvaus(koodi);
+         r.tarkista(koodi);
          
         StringBuilder tulos = new StringBuilder();
         tulos.append(r.getTarkistus());
                  
         assertEquals("XXXXXX", tulos.toString());
     }
+     
      @Test
-     public void onkoArvattuPalauttaaTrueKunRatkaistu(){
-          int[] arvaus = {1,1,1,1,1,1};
+     public void KoodinRatkaisuAntaaTulostaulunKunReunatVaarin(){
+         int[] arvaus = {1,1,2,3,4,1};
          
          r.setArvaus(arvaus);
-         r.tarkista(arvaus);
+         r.tarkista(koodi);
+         
+        StringBuilder tulos = new StringBuilder();
+        tulos.append(r.getTarkistus());
+                 
+        assertEquals("-XXXX-", tulos.toString());
+     }
+     @Test
+     public void onkoArvattuPalauttaaTrueKunRatkaistu(){
+         
+         r.setArvaus(koodi);
+         r.tarkista(koodi);
          assertEquals(true,r.onkoArvattu());
      }
+     @Test
+     public void tarkistaToimiiKunMerkitVaarillaPaikoilla(){
+         int[] arvaus = {5,4,3,2,1,0};
+         
+         r.setArvaus(arvaus);
+         r.tarkista(koodi);
+         
+        StringBuilder tulos = new StringBuilder();
+        tulos.append(r.getTarkistus());
+                 
+        assertEquals("ZZZZZZ", tulos.toString()); 
+     }
+     
+     
      
 }
