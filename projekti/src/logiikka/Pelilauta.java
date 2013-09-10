@@ -9,16 +9,16 @@ import java.util.ArrayList;
 public class Pelilauta implements java.io.Serializable{
     private int[] arvattavaKoodi;
     private ArrayList rivit;
-    private int rivienLukumaara;
-    private boolean loppu;
+    private int rivejaJaljella;
+    private boolean onkoRatkaistu;
     
     
     
     public Pelilauta(int[] koodi,int lkm){
         this.arvattavaKoodi = koodi;
         rivit = new ArrayList();
-        rivienLukumaara = lkm;
-        loppu=false;
+        rivejaJaljella = lkm;
+        onkoRatkaistu=false;
     }
 
     public void setKoodi(int[] koodi) {
@@ -33,18 +33,22 @@ public class Pelilauta implements java.io.Serializable{
         return rivit;
     }
     
+    public boolean getRatkaistu(){
+        return onkoRatkaistu;
+    }
+    
     public void generoiKoodi(){
         //TODO : Koodin arvonta
     }
     
     public void lisaaRivi(Rivi r){
         rivit.add(r);
-        loppu = r.onkoArvattu();
+        onkoRatkaistu = r.onkoArvattu();
+        rivejaJaljella--;
     }
     
-    //TODO : Tarkista onko rivien lukumäärä täynnä
-    public boolean onkoArvauksiaJaljella(){
-        if(!loppu){return true;}
+   public boolean onkoArvauksiaJaljella(){
+        if(!onkoRatkaistu && rivejaJaljella > 0){return true;}
         return false;
     }
  }
