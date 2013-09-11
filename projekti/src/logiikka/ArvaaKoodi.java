@@ -1,3 +1,5 @@
+//Pelaaja arvaa koodia
+
 package logiikka;
 
 public class ArvaaKoodi extends  Komento{

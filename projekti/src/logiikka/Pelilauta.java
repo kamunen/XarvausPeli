@@ -5,6 +5,7 @@
 package logiikka;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Pelilauta implements java.io.Serializable{
     private int[] arvattavaKoodi;
@@ -13,12 +14,21 @@ public class Pelilauta implements java.io.Serializable{
     private boolean onkoRatkaistu;
     
     
+    public Pelilauta(){
+        rivit = new ArrayList();
+    }
     
-    public Pelilauta(int[] koodi,int lkm){
+    public Pelilauta(int koodinPituus, int vaihtoehtojenLkm, int riviLkm){
+        generoiKoodi(koodinPituus,vaihtoehtojenLkm);
+        rivit = new ArrayList();
+        rivejaJaljella = riviLkm;
+        
+    }
+    
+    public Pelilauta(int[] koodi,int riviLkm){
         this.arvattavaKoodi = koodi;
         rivit = new ArrayList();
-        rivejaJaljella = lkm;
-        onkoRatkaistu=false;
+        rivejaJaljella = riviLkm;
     }
 
     public void setKoodi(int[] koodi) {
@@ -33,26 +43,42 @@ public class Pelilauta implements java.io.Serializable{
         return rivit;
     }
     
-    public boolean getRatkaistu(){
+    public boolean getOnkoRatkaistu(){
         return onkoRatkaistu;
     }
-    
+
+    public void setRivejaJaljella(int rivejaJaljella) {
+        this.rivejaJaljella = rivejaJaljella;
+    }
+
     public int getRivajaJaljella(){
         return rivejaJaljella;
     }
     
-    public void generoiKoodi(){
-        //TODO : Koodin arvonta
+    public void generoiKoodi(int p, int v){
+        int[] koodi = new int[p];
+        Random r = new Random();
+        
+        for (int i = 0; i < koodi.length; i++) {
+                koodi[i] = r.nextInt(v);
+            }
+        setKoodi(koodi);
     }
     
     public void lisaaRivi(Rivi r){
         rivit.add(r);
         onkoRatkaistu = r.onkoArvattu();
         rivejaJaljella--;
+        
     }
     
    public boolean onkoArvauksiaJaljella(){
         if(!onkoRatkaistu && rivejaJaljella > 0){return true;}
         return false;
     }
+   
+   public Rivi annaViimeisinRivi(){
+       
+       return (Rivi)rivit.get(rivit.size()-1);
+   }
  }

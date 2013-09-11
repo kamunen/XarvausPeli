@@ -4,6 +4,7 @@
  */
 package logiikka;
 
+import java.util.HashSet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,8 +46,30 @@ public class PelilautaTest {
          Rivi r =new Rivi();
          r.setArvaus(koodi);
          p.lisaaRivi(r);
+         p.lisaaRivi(r);
          
          assertEquals(0, p.getRivajaJaljella());
+     }
+     
+     @Test
+     public void onkoRatkaistuPalauttaaTrueKunRatkaisuLoytyy(){
+         Rivi r = new Rivi();
+         r.setArvaus(koodi);
+         r.tarkista(koodi);
+         p.lisaaRivi(r);
+         assertEquals(true,p.getOnkoRatkaistu());
+     }
+     @Test
+     public void onkoRatkaistuPalauttaaFalseKunRatkaisuaEiLoydy(){
+        Rivi r = new Rivi();
+        int[] arvaus = new int[koodi.length];
+         for (int i = 0; i < koodi.length; i++) {
+             arvaus[i]=i;
+         }
+        r.setArvaus(arvaus);
+         r.tarkista(koodi);
+         p.lisaaRivi(r);
+         assertEquals(false,p.getOnkoRatkaistu());
          
      }
 }
