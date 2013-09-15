@@ -10,25 +10,28 @@ import java.util.Random;
 public class Pelilauta implements java.io.Serializable{
     private int[] arvattavaKoodi;
     private ArrayList rivit;
-    private int rivejaJaljella;
-    private boolean onkoRatkaistu;
+    private PeliTapahtuma peliTapahtuma;
     
     
     public Pelilauta(){
         rivit = new ArrayList();
+        peliTapahtuma = new PeliTapahtuma();
     }
     
     public Pelilauta(int koodinPituus, int vaihtoehtojenLkm, int riviLkm){
         generoiKoodi(koodinPituus,vaihtoehtojenLkm);
         rivit = new ArrayList();
-        rivejaJaljella = riviLkm;
+        peliTapahtuma = new PeliTapahtuma();
+        peliTapahtuma.setRivejaJaljella(riviLkm);
         
     }
     
     public Pelilauta(int[] koodi,int riviLkm){
         this.arvattavaKoodi = koodi;
         rivit = new ArrayList();
-        rivejaJaljella = riviLkm;
+        peliTapahtuma = new PeliTapahtuma();
+        peliTapahtuma.setRivejaJaljella(riviLkm);
+       
     }
 
     public void setKoodi(int[] koodi) {
@@ -44,18 +47,20 @@ public class Pelilauta implements java.io.Serializable{
     }
     
     public boolean getOnkoRatkaistu(){
-        return onkoRatkaistu;
+       // return onkoRatkaistu;
+        return peliTapahtuma.getOnkoRatkaistu();
     }
 
     public void setRivejaJaljella(int rivejaJaljella) {
-        this.rivejaJaljella = rivejaJaljella;
+        peliTapahtuma.setRivejaJaljella(rivejaJaljella);
     }
 
     public int getRivajaJaljella(){
-        return rivejaJaljella;
+        //return rivejaJaljella;
+       return peliTapahtuma.getRivajaJaljella();
     }
     
-    public void generoiKoodi(int p, int v){
+    private void generoiKoodi(int p, int v){
         int[] koodi = new int[p];
         Random r = new Random();
         
@@ -67,14 +72,13 @@ public class Pelilauta implements java.io.Serializable{
     
     public void lisaaRivi(Rivi r){
         rivit.add(r);
-        onkoRatkaistu = r.onkoArvattu();
-        rivejaJaljella--;
+        peliTapahtuma.setOnkoRatkaistu(r.onkoArvattu());
+        peliTapahtuma.setRivejaJaljella(peliTapahtuma.getRivajaJaljella()-1);
         
     }
     
    public boolean onkoArvauksiaJaljella(){
-        if(!onkoRatkaistu && rivejaJaljella > 0){return true;}
-        return false;
+       return peliTapahtuma.onkoArvauksiaJaljella();
     }
    
    public Rivi annaViimeisinRivi(){

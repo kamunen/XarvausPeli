@@ -4,6 +4,7 @@ import java.util.Scanner;
 import logiikka.Pelilauta;
 import java.util.Random;
 import logiikka.*;
+import tiedosto.Tiedosto;
 
 
 public class TekstiKaLi {
@@ -27,13 +28,41 @@ public class TekstiKaLi {
       
         pelilauta = new Pelilauta(koodinPituus,eriMerkkeja,arvaustenLkm);
         
-        System.out.println("(l - kirjain lopettaa)");
+        System.out.println("(q - kirjain lopettaa)");
+        System.out.println("(t - tallettaa)");
+        System.out.println("(l - kirjain lataa)");
+        
         System.out.println("");
         while(pelilauta.onkoArvauksiaJaljella()){
                System.out.println("Arvaa koodi : ");
         
                String s = lukija.next();
-               if (s.equals("l")){break;}
+               if (s.equals("q")){break;}
+               if (s.equals("t")){
+                   Tiedosto t = new Tiedosto();
+                   try{
+                    t.talletaPeli("peli.dat", pelilauta);
+                   }
+                   catch(Exception e){
+                       System.out.println(e.toString());
+                    break;
+                   }
+                   System.out.println("Talletettu!");
+               continue;    
+               }
+               if(s.equals("l")){
+                   Tiedosto l = new Tiedosto();
+                   try{
+                       pelilauta = l.lataaPeli("peli.dat");
+                       System.out.println(pelilauta.getRivit());
+                   }
+                   catch(Exception e){
+                       System.out.println(e.toString());
+                       break;
+                   }
+                   System.out.println("Ladattu!");
+                   continue;
+                   }
                
                try{
                 Integer.parseInt(s);
@@ -65,7 +94,6 @@ public class TekstiKaLi {
             System.out.println("Hienoa! Ratkaisu löytyi");
         }
         else{
-            System.out.println("Voi!Arvauskerrat loppui");
             naytaKoodi();
         }
     }
@@ -80,7 +108,7 @@ public class TekstiKaLi {
       private void naytaKoodi(){
           int[] koodi = pelilauta.getKoodi();
           
-        System.out.println(" -- Koodi -- ");
+        System.out.println(" -- Oikea Koodi on -- ");
         for (int i : koodi) {
             System.out.print(i);
         }

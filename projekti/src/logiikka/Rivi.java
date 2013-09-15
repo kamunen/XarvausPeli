@@ -1,6 +1,6 @@
 package logiikka;
 
-public class Rivi {
+public class Rivi implements java.io.Serializable{
     private int[] arvaus;
     private char[] tulos;
     private int oikeinLkm;
