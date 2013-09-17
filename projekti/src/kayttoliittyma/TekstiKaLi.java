@@ -18,7 +18,7 @@ public class TekstiKaLi {
     }
     
     public void kaynnista(){
-        int koodinPituus = 5;
+        int koodinPituus = 2;
         int arvaustenLkm = 5;
         int eriMerkkeja = 5;
         

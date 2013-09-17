@@ -82,7 +82,7 @@ public class Rivi implements java.io.Serializable{
                 }
             }
         }
-       }
+    }
     
     
     @Override
