@@ -26,15 +26,18 @@ public class XarvausPeli {
             
             
             System.out.println("STARTTAA TextUI = t ; muu nappi = GraphUI ?");
+            
             if (l.next().equals("t")){
                 TekstiKaLi kl = new TekstiKaLi(l,p);
                 kl.kaynnista();
             }
-            System.out.println("START GraphUI");
             
-            GrafiikkaKaLi g = new GrafiikkaKaLi();
-            g.kaynnista();
+            else{
+                System.out.println("START GraphUI");
             
+                GrafiikkaKaLi g = new GrafiikkaKaLi();
+                g.kaynnista();
+            }
             
       
 //        } catch (FileNotFoundException ex) {
