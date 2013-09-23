@@ -1,23 +1,33 @@
 package logiikka;
 
-public class PeliTapahtuma implements java.io.Serializable{
-    
+/**
+ * Luokka pelitilnteen tallettamista varten
+ */
+
+public class PeliTapahtuma implements java.io.Serializable {
+
     private int rivejaJaljella;
     private boolean onkoRatkaistu;
-    
-    public PeliTapahtuma(){
-        
+
+    public PeliTapahtuma() {
     }
-    
-     public void setOnkoRatkaistu(boolean onkoRatkaistu) {
+
+    public void setOnkoRatkaistu(boolean onkoRatkaistu) {
         this.onkoRatkaistu = onkoRatkaistu;
     }
-      public boolean getOnkoRatkaistu(){
+
+    public boolean getOnkoRatkaistu() {
         return onkoRatkaistu;
     }
-      
-      public boolean onkoArvauksiaJaljella(){
-        if(!onkoRatkaistu && rivejaJaljella > 0){return true;}
+
+    /**
+     * Palautetaan tieto, onko koodi ratkaistu
+     * @return true, jos rivejä jäljellä eikä arvaus ollut oikein
+     */
+    public boolean onkoArvauksiaJaljella() {
+        if (!onkoRatkaistu && rivejaJaljella > 0) {
+            return true;
+        }
         return false;
     }
 
@@ -25,7 +35,7 @@ public class PeliTapahtuma implements java.io.Serializable{
         this.rivejaJaljella = rivejaJaljella;
     }
 
-    public int getRivajaJaljella(){
+    public int getRivajaJaljella() {
         return rivejaJaljella;
     }
 }

@@ -1,5 +1,7 @@
 
-//Abstrakti luokka käyttöliittymän ja logiikan väliin
+/**
+ * Abstrakti luokka käyttöliittymän ja logiikan väliin
+*/
 
 package logiikka;
 

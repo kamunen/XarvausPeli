@@ -1,5 +1,9 @@
 package tiedosto;
 
+/**
+ * Luokka pelitilanteen tallettamista ja uudelleen lataamista varten
+ *
+ */
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,33 +16,53 @@ import logiikka.Pelilauta;
 
 public class Tiedosto {
 
-    public Tiedosto(){
-        
+    public Tiedosto() {
     }
-    
-    public void talletaPeli(String nimi,Pelilauta p) throws Exception{
+
+    /**
+     * Metodi tallettaa pelitilanteen levyle
+     *
+     * @param nimi Tiedoston mini
+     * @param p Talletettava pelilauta - olio
+     * @throws Exception
+     */
+    public void talletaPeli(String nimi, Pelilauta p) throws Exception {
         FileOutputStream out = new FileOutputStream(nimi);
         ObjectOutputStream obs = new ObjectOutputStream(out);
         obs.writeObject(p);
     }
-    
-    public Pelilauta lataaPeli(String nimi) throws Exception{
+
+    /**
+     * Metodi lukee tallettun pelitilanteen levyltä
+     *
+     * @param nimi Tiedoston nimi
+     * @return Pelilauta - olio
+     * @throws Exception
+     */
+    public Pelilauta lataaPeli(String nimi) throws Exception {
         FileInputStream in = new FileInputStream(nimi);
         ObjectInputStream obs = new ObjectInputStream(in);
         Object o = obs.readObject();
-        
-        if (o instanceof Pelilauta){
-            return (Pelilauta)o;
+
+        if (o instanceof Pelilauta) {
+            return (Pelilauta) o;
         }
         return null;
-        
+
     }
-    
-    public Properties annaKonfigurointi(String nimi) throws FileNotFoundException, IOException{
+
+    /**
+     * Luetaan konfigurointitiot (Ei kytketty mihinkään toimintoon)
+     *
+     * @param nimi Tiedoston nimi
+     * @return Proprties luokan olio
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public Properties annaKonfigurointi(String nimi) throws FileNotFoundException, IOException {
         Properties prop = new Properties();
         InputStream in = new FileInputStream(nimi);
         prop.load(in);
         return prop;
     }
-    
 }

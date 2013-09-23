@@ -1,6 +1,11 @@
 
-//Pelilauta - luokka sisältää arvattavan koodin ja 
-// Rivi - oliot, joissa arvaus ja tarkistus
+/**
+ * Pelilauta - luokka sisältää arvattavan koodin ja 
+ * Rivi - oliot, joissa arvaus ja tarkistus
+ *
+ *
+ * 
+ */
 
 package logiikka;
 
@@ -12,11 +17,20 @@ public class Pelilauta implements java.io.Serializable{
     private ArrayList rivit;
     private PeliTapahtuma peliTapahtuma;
     
-    
+/*
+ * Luo tyhjän pelilaudan
+ */    
     public Pelilauta(){
         rivit = new ArrayList();
         peliTapahtuma = new PeliTapahtuma();
     }
+    
+    /**
+     * Luo pelilaudan ja kutsuu koodin gnerointimetodia
+     * @param koodinPituus Kuinka monta merkkiä pitkä koodi on
+     * @param vaihtoehtojenLkm Montako erilaista merkkiä koodi sisältää
+     * @param riviLkm arvausten lukumäärä
+     */
     
     public Pelilauta(int koodinPituus, int vaihtoehtojenLkm, int riviLkm){
         generoiKoodi(koodinPituus,vaihtoehtojenLkm);
@@ -26,6 +40,11 @@ public class Pelilauta implements java.io.Serializable{
         
     }
     
+    /**
+     * Luo uuden pelilaudan
+     * @param koodi arvattava koodi
+     * @param riviLkm arvausten lukumäärä
+     */
     public Pelilauta(int[] koodi,int riviLkm){
         this.arvattavaKoodi = koodi;
         rivit = new ArrayList();
@@ -47,7 +66,6 @@ public class Pelilauta implements java.io.Serializable{
     }
     
     public boolean getOnkoRatkaistu(){
-       // return onkoRatkaistu;
         return peliTapahtuma.getOnkoRatkaistu();
     }
 
@@ -56,10 +74,14 @@ public class Pelilauta implements java.io.Serializable{
     }
 
     public int getRivajaJaljella(){
-        //return rivejaJaljella;
-       return peliTapahtuma.getRivajaJaljella();
+        return peliTapahtuma.getRivajaJaljella();
     }
     
+    /**
+     * Generoidaan arvattava koodi
+     * @param p koodin pituus
+     * @param v koodin vaihteluväli (0 <= luku < v)
+     */
     private void generoiKoodi(int p, int v){
         int[] koodi = new int[p];
         Random r = new Random();
@@ -70,19 +92,31 @@ public class Pelilauta implements java.io.Serializable{
         setKoodi(koodi);
     }
     
+    /**
+     * Lisätään yksi arvauskerta (Pelirivi) pelilaudalle
+     * @param r pelattu rivi
+     */
     public void lisaaRivi(Rivi r){
         rivit.add(r);
         peliTapahtuma.setOnkoRatkaistu(r.onkoArvattu());
         peliTapahtuma.setRivejaJaljella(peliTapahtuma.getRivajaJaljella()-1);
         
     }
-    
+    /**
+     * Palautetaan tieto siitä onko arvauksia jäljellä
+     * @return true jos arvauksia on jäljellä
+     */
    public boolean onkoArvauksiaJaljella(){
        return peliTapahtuma.onkoArvauksiaJaljella();
     }
    
+   /**
+    * Palauttaa viimeisimmän pelatun rivin
+    * @return Rivi
+    */
    public Rivi annaViimeisinRivi(){
        
+       //TODO : Virheenkäsittely, jos lista on tyhjä
        return (Rivi)rivit.get(rivit.size()-1);
    }
  }
