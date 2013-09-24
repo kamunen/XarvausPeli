@@ -102,6 +102,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Arvaa piilossa oleva koodi (MasterMind - peli)");
         setPreferredSize(new java.awt.Dimension(660, 700));
 
         jTextField1.setText("Paina \"Aloita Peli\" - nappia");
