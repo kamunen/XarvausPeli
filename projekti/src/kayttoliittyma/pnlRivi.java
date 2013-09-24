@@ -19,29 +19,28 @@ public class pnlRivi extends javax.swing.JPanel {
 
         String[] s = new String[lkm];
 
+        //Taulukko alasvetovalikkon sisältöä varten
         for (int i = 0; i < lkm; i++) {
             s[i] = "" + i;
         }
 
+        // Alustetaan alasvetovalikot taulukolla ja
+        // mustalla reunuksella
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(s));
         jComboBox1.setBorder(new javax.swing.border.LineBorder(
                 new Color(0, 0, 0), 1, true));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(s));
         jComboBox2.setBorder(new javax.swing.border.LineBorder(
                 new Color(0, 0, 0), 1, true));
-
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(s));
         jComboBox3.setBorder(new javax.swing.border.LineBorder(
                 new Color(0, 0, 0), 1, true));
-
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(s));
         jComboBox4.setBorder(new javax.swing.border.LineBorder(
                 new Color(0, 0, 0), 1, true));
 
         jTextField1.setText("");
         this.aktiivinen(false);
-
-
     }
 
     public void aktiivinen(boolean arvo) {
@@ -50,9 +49,7 @@ public class pnlRivi extends javax.swing.JPanel {
             if (o instanceof JComboBox) {
                 JComboBox j = (JComboBox) o;
                 j.setEnabled(arvo);
-                //asetaRivi(j);
-            }
-            if (o instanceof JTextField) {
+            }else if (o instanceof JTextField) {
                 JTextField t = (JTextField) o;
                 t.setEnabled(arvo);
             }
@@ -105,8 +102,6 @@ public class pnlRivi extends javax.swing.JPanel {
                         valkoinen, 3, true));
             }
         }
-
-
     }
 
     /**
@@ -157,6 +152,7 @@ public class pnlRivi extends javax.swing.JPanel {
         jComboBox4.setBorder(null);
         jComboBox4.setEnabled(false);
 
+        jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextField1.setEnabled(false);
 
