@@ -1,6 +1,8 @@
 
 package kayttoliittyma;
 
+import java.awt.Component;
+import java.util.HashMap;
 import logiikka.ArvaaKoodi;
 import logiikka.Komento;
 import logiikka.Pelilauta;
@@ -12,24 +14,41 @@ import logiikka.Rivi;
 public class GrafiikkaKaLi extends javax.swing.JFrame {
     
    private Pelilauta pelilauta;
+    private HashMap pnlRivit;
     /**
      * Luo uuden ilmentymän
      */
     public GrafiikkaKaLi() {
         initComponents();
-         
+        teeRiviTaulukko();
     }
+    
+     private void teeRiviTaulukko(){
+         pnlRivit = new HashMap<String, pnlRivi>();
+       
+        for (Component c : getContentPane().getComponents()) {
+                if(c instanceof pnlRivi){
+                    pnlRivit.put(c.getName(), c);
+                }
+           }
+    }
+     
+       public pnlRivi annaPaneliNimella(String nimi) {
+        if (pnlRivit.containsKey(nimi)) {
+                return (pnlRivi) pnlRivit.get(nimi);
+        }
+        else return null;
+}
+  
     
     /**
      * Luetaan käyttäjän valitsema koodi ja tarkistetaan se
      */
     private void arvaaKoodi() {
-        int[] arvaus = new int[3];
-        arvaus[0] = Integer.parseInt(jComboBox1.getSelectedItem().toString());
-        arvaus[1] = Integer.parseInt(jComboBox2.getSelectedItem().toString());
-        arvaus[2] = Integer.parseInt(jComboBox3.getSelectedItem().toString());
-
-        Komento k = new ArvaaKoodi(arvaus, pelilauta);
+        
+        pnlRivi pnl = annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
+       
+        Komento k = new ArvaaKoodi(pnl.annaArvaus(), pelilauta);
         k.suorita();
 
         if (pelilauta.getOnkoRatkaistu()) {
@@ -47,8 +66,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             jTextField1.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
             jButton1.setEnabled(false);
         } else {
-            Rivi r = pelilauta.annaViimeisinRivi();
-            jTextField1.setText(r.getOikeinLkm() + " oikealla paikalla ja " + r.getMukanaLkm() + " oikeaa merkkiä");
         }
     }
 
@@ -61,36 +78,31 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        pnlRivi1 = new kayttoliittyma.pnlRivi();
+        pnlRivi2 = new kayttoliittyma.pnlRivi();
+        pnlRivi3 = new kayttoliittyma.pnlRivi();
+        pnlRivi4 = new kayttoliittyma.pnlRivi();
+        pnlRivi5 = new kayttoliittyma.pnlRivi();
+        jComboBox1 = new javax.swing.JComboBox();
+        pnlRivi6 = new kayttoliittyma.pnlRivi();
+        pnlRivi7 = new kayttoliittyma.pnlRivi();
+        pnlRivi8 = new kayttoliittyma.pnlRivi();
+        pnlRivi9 = new kayttoliittyma.pnlRivi();
+        pnlRivi10 = new kayttoliittyma.pnlRivi();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jComboBox1.setBackground(new java.awt.Color(255, 0, 0));
-        jComboBox1.setMaximumRowCount(10);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
-
-        jComboBox2.setBackground(new java.awt.Color(255, 0, 0));
-        jComboBox2.setMaximumRowCount(10);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
-
-        jComboBox3.setBackground(new java.awt.Color(255, 0, 0));
-        jComboBox3.setMaximumRowCount(10);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        setPreferredSize(new java.awt.Dimension(660, 700));
 
         jTextField1.setText("Paina \"Aloita Peli\" - nappia");
 
@@ -109,106 +121,156 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             }
         });
 
-        jTextField2.setEditable(false);
-
-        jLabel1.setText("Jäljellä");
-
-        jLabel2.setText("arvausta");
-
         jLabel3.setText("Vaihtoehtoja merkille");
 
-        jTextField3.setEditable(false);
-        jTextField3.setText("3");
-        jTextField3.setName("txtRivienLkm"); // NOI18N
+        pnlRivi1.setName("pnlRivi1"); // NOI18N
 
-        jLabel4.setText("Arvausten lukumäärä");
+        pnlRivi2.setName("pnlRivi2"); // NOI18N
 
-        jTextField4.setEditable(false);
-        jTextField4.setText("5");
-        jTextField4.setName("txtArvaustenLkm"); // NOI18N
+        pnlRivi3.setName("pnlRivi3"); // NOI18N
 
-        jLabel5.setText("Prototyyppi : Tähän pelitavan valinta ");
+        pnlRivi4.setName("pnlRivi4"); // NOI18N
+
+        pnlRivi5.setName("pnlRivi5"); // NOI18N
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        jComboBox1.setSelectedIndex(4);
+        jComboBox1.setName(""); // NOI18N
+
+        pnlRivi6.setName("pnlRivi6"); // NOI18N
+
+        pnlRivi7.setName("pnlRivi7"); // NOI18N
+
+        pnlRivi8.setName("pnlRivi8"); // NOI18N
+
+        pnlRivi9.setName("pnlRivi9"); // NOI18N
+
+        pnlRivi10.setName("pnlRivi10"); // NOI18N
+
+        buttonGroup2.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Helppo versio");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(jRadioButton2);
+        jRadioButton2.setText("Haasteellisempi");
+
+        jLabel1.setText("Kaksinpeli vaihtoehto puuttuu");
+
+        jButton3.setText("Tallenna pelitilanne");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Lataa pelitilanne");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
-                        .addContainerGap())
+                        .addComponent(jRadioButton2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(23, 23, 23))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jRadioButton1)
+                        .addGap(150, 150, 150)
                         .addComponent(jLabel3)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator2)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(5, 5, 5)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                        .addGap(30, 30, 30)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(45, 45, 45))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(34, 34, 34))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlRivi5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlRivi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel5)
-                .addGap(9, 9, 9)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)))
-                .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jRadioButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlRivi2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlRivi10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addGap(95, 95, 95))
         );
 
         pack();
@@ -219,8 +281,54 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
      * Koodin arvausnappi 
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        arvaaKoodi();
-        jTextField2.setText(""+pelilauta.getRivajaJaljella());
+        
+        int arvauksiaJaljella = pelilauta.getRivajaJaljella();
+        jTextField1.setText("Arvauksia jäljellä : "+ (arvauksiaJaljella - 1) );
+        
+        pnlRivi pnl = annaPaneliNimella("pnlRivi"+arvauksiaJaljella);
+    
+        Komento k = new ArvaaKoodi(pnl.annaArvaus(), pelilauta);
+        k.suorita();
+
+        if (pelilauta.getOnkoRatkaistu()) {
+            jTextField1.setText("Oikain");
+            jButton1.setEnabled(false);
+            pnl.aktiivinen(false);
+            pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
+         
+
+        } else if (!pelilauta.onkoArvauksiaJaljella()) {
+            int[] koodi = pelilauta.getKoodi();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i : koodi) {
+                sb.append(i);
+            }
+            System.out.println("");
+            jTextField1.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
+            jButton1.setEnabled(false);
+            pnl.aktiivinen(false);
+            pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
+            
+        }else{
+             pnl.aktiivinen(false);
+             
+             pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),jRadioButton1.isSelected());
+             
+            pnl = (pnlRivi) annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
+            pnl.aktiivinen(true);
+        
+        }
+        
+            
+           
+        
+            
+        
+    
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -228,21 +336,37 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
      * 
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        pelilauta = new Pelilauta(3,3,5);
-        jTextField2.setText(""+pelilauta.getRivajaJaljella());
-        jTextField1.setText("");
+        int eriValintojenLkm;
+        int koodinPituus = 4;
+        int arvaustenMaxLkm = 10;
+        
+        eriValintojenLkm = Integer.parseInt(jComboBox1.getSelectedItem().toString());
+        
+        pelilauta = new Pelilauta(koodinPituus,eriValintojenLkm,arvaustenMaxLkm);
+        
+        jTextField1.setText("Valitse koodi");
         jButton1.setEnabled(true);
-        jTextField1.setText(" <- Valitse koodi alasvetovalikoista");
-
-        jComboBox1.setMaximumRowCount(3);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2" }));
-        jComboBox2.setMaximumRowCount(3);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2" }));
-        jComboBox3.setMaximumRowCount(3);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2" }));
-
+        
+        for (int i = 1; i <= arvaustenMaxLkm; i++) {
+            pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi"+i);
+            r.alustaRivi(eriValintojenLkm);
+        }
+           pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi"+arvaustenMaxLkm);
+           r.aktiivinen(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        jRadioButton1.setSelected(true);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextField1.setText("Toimintoa ei ole toteutettu");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+         jTextField1.setText("Toimintoa ei ole toteutettu");
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     
     public void kaynnista() {
@@ -281,22 +405,28 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private kayttoliittyma.pnlRivi pnlRivi1;
+    private kayttoliittyma.pnlRivi pnlRivi10;
+    private kayttoliittyma.pnlRivi pnlRivi2;
+    private kayttoliittyma.pnlRivi pnlRivi3;
+    private kayttoliittyma.pnlRivi pnlRivi4;
+    private kayttoliittyma.pnlRivi pnlRivi5;
+    private kayttoliittyma.pnlRivi pnlRivi6;
+    private kayttoliittyma.pnlRivi pnlRivi7;
+    private kayttoliittyma.pnlRivi pnlRivi8;
+    private kayttoliittyma.pnlRivi pnlRivi9;
     // End of variables declaration//GEN-END:variables
 }
 
