@@ -9,12 +9,13 @@ import logiikka.Pelilauta;
 import logiikka.Rivi;
 
 /**
- *  Pelin graafinen käyttöliittymä
+ * Pelin graafinen käyttöliittymä
  */
 public class GrafiikkaKaLi extends javax.swing.JFrame {
-    
-   private Pelilauta pelilauta;
-   private HashMap<String,pnlRivi> pnlRivit;
+
+    private Pelilauta pelilauta;
+    private HashMap<String, pnlRivi> pnlRivit;
+
     /**
      * Luo uuden ilmentymän
      */
@@ -22,32 +23,32 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         initComponents();
         teeRiviTaulukko();
     }
-    
-     private void teeRiviTaulukko(){
-         pnlRivit = new HashMap<>();
-       
+
+    private void teeRiviTaulukko() {
+        pnlRivit = new HashMap<>();
+
         for (Component c : getContentPane().getComponents()) {
-                if(c instanceof pnlRivi){
-                    pnlRivit.put(c.getName(), (pnlRivi)c);
-                }
-           }
-    }
-     
-       public pnlRivi annaPaneliNimella(String nimi) {
-        if (pnlRivit.containsKey(nimi)) {
-                return pnlRivit.get(nimi);
+            if (c instanceof pnlRivi) {
+                pnlRivit.put(c.getName(), (pnlRivi) c);
+            }
         }
-        else return null;
-}
-  
-    
+    }
+
+    public pnlRivi annaPaneliNimella(String nimi) {
+        if (pnlRivit.containsKey(nimi)) {
+            return pnlRivit.get(nimi);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Luetaan käyttäjän valitsema koodi ja tarkistetaan se
      */
     private void arvaaKoodi() {
-        
-        pnlRivi pnl = annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
-       
+
+        pnlRivi pnl = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
+
         Komento k = new ArvaaKoodi(pnl.annaArvaus(), pelilauta);
         k.suorita();
 
@@ -69,11 +70,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         }
     }
 
-   
-
     /**
-     *Generoitu koodi
-    */
+     * Generoitu koodi
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -329,78 +328,86 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
-     * Koodin arvausnappi 
+     *
+     * Koodin arvausnappi
      */
     private void bArvaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArvaaActionPerformed
-        
+
         int arvauksiaJaljella = pelilauta.getRivajaJaljella();
-        txtInfo.setText("Arvauksia jäljellä : "+ (arvauksiaJaljella - 1) );
-        
-        pnlRivi pnl = annaPaneliNimella("pnlRivi"+arvauksiaJaljella);
-    
+        txtInfo.setText("Arvauksia jäljellä : " + (arvauksiaJaljella - 1));
+
+        pnlRivi pnl = annaPaneliNimella("pnlRivi" + arvauksiaJaljella);
+
         Komento k = new ArvaaKoodi(pnl.annaArvaus(), pelilauta);
         k.suorita();
 
         if (pelilauta.getOnkoRatkaistu()) {
-            txtInfo.setText("Oikain");
-            bArvaa.setEnabled(false);
-            pnl.aktiivinen(false);
-            pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
-         
+            koodiLoytyi(pnl);
+
 
         } else if (!pelilauta.onkoArvauksiaJaljella()) {
-            int[] koodi = pelilauta.getKoodi();
-            StringBuilder sb = new StringBuilder();
+            arvauksetKaytetty(pnl);
 
-            for (int i : koodi) {
-                sb.append(i);
-            }
-            System.out.println("");
-            txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
-            bArvaa.setEnabled(false);
-            pnl.aktiivinen(false);
-            pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
-            
-        }else{
-            t(pnl);
-        
+        } else {
+            jatkaPelia(pnl);
+
         }
-      
+
     }//GEN-LAST:event_bArvaaActionPerformed
 
-      private void t(pnlRivi pnl) {
+    private void koodiLoytyi(pnlRivi pnl) {
+        txtInfo.setText("Oikein !");
+        bArvaa.setEnabled(false);
         pnl.aktiivinen(false);
-        
-        pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),rbHelppoVersio.isSelected());
-        
-       pnl = (pnlRivi) annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
-       pnl.aktiivinen(true);
+        pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), true);
     }
-      
+
+    private void arvauksetKaytetty(pnlRivi pnl) {
+        int[] koodi = pelilauta.getKoodi();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i : koodi) {
+            sb.append(i);
+        }
+        System.out.println("");
+        txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
+        bArvaa.setEnabled(false);
+        pnl.aktiivinen(false);
+        pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), true);
+    }
+
+    private void jatkaPelia(pnlRivi pnl) {
+        pnl.aktiivinen(false);
+
+        pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), rbHelppoVersio.isSelected());
+
+        pnl = (pnlRivi) annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
+        pnl.aktiivinen(true);
+    }
+
     /**
      * Pelin aloitusnappi
-     * 
+     *
      */
     private void bAloitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAloitaActionPerformed
         int eriValintojenLkm;
         int koodinPituus = 4;
         int arvaustenMaxLkm = 10;
-        
+
         eriValintojenLkm = Integer.parseInt(cbxVaihtoehtoja.getSelectedItem().toString());
-        
-        pelilauta = new Pelilauta(koodinPituus,eriValintojenLkm,arvaustenMaxLkm);
-        
+
+        pelilauta = new Pelilauta(koodinPituus, eriValintojenLkm, arvaustenMaxLkm);
+
         txtInfo.setText("Valitse koodi");
         bArvaa.setEnabled(true);
-        
+
         for (int i = 1; i <= arvaustenMaxLkm; i++) {
-            pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi"+i);
+            pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi" + i);
             r.alustaRivi(eriValintojenLkm);
         }
-           pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi"+arvaustenMaxLkm);
-           r.aktiivinen(true);
-        
+        pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi" + arvaustenMaxLkm);
+        r.aktiivinen(true);
+
     }//GEN-LAST:event_bAloitaActionPerformed
 
     private void rbHelppoVersioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHelppoVersioActionPerformed
@@ -412,10 +419,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     }//GEN-LAST:event_bTallennaPelitilanneActionPerformed
 
     private void bLataaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLataaPelitilanneActionPerformed
-         txtInfo.setText("Toimintoa ei ole toteutettu");
+        txtInfo.setText("Toimintoa ei ole toteutettu");
     }//GEN-LAST:event_bLataaPelitilanneActionPerformed
 
-    
     public void kaynnista() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -440,14 +446,14 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-      
-        
+
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new GrafiikkaKaLi().setVisible(true);
-                
+
             }
         });
     }
@@ -476,8 +482,4 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbHelppoVersio;
     private javax.swing.JTextField txtInfo;
     // End of variables declaration//GEN-END:variables
-
-  
 }
-
-
