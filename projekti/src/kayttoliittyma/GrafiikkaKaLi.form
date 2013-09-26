@@ -273,6 +273,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtInfo">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="Paina &quot;Aloita Peli&quot; - nappia"/>
           </Properties>
         </Component>

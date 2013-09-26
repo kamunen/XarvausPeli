@@ -6,7 +6,6 @@ import java.util.HashMap;
 import logiikka.ArvaaKoodi;
 import logiikka.Komento;
 import logiikka.Pelilauta;
-import logiikka.Rivi;
 
 /**
  * Pelin graafinen käyttöliittymä
@@ -39,34 +38,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             return pnlRivit.get(nimi);
         } else {
             return null;
-        }
-    }
-
-    /**
-     * Luetaan käyttäjän valitsema koodi ja tarkistetaan se
-     */
-    private void arvaaKoodi() {
-
-        pnlRivi pnl = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
-
-        Komento k = new ArvaaKoodi(pnl.annaArvaus(), pelilauta);
-        k.suorita();
-
-        if (pelilauta.getOnkoRatkaistu()) {
-            txtInfo.setText("Oikain");
-            bArvaa.setEnabled(false);
-
-        } else if (!pelilauta.onkoArvauksiaJaljella()) {
-            int[] koodi = pelilauta.getKoodi();
-            StringBuilder sb = new StringBuilder();
-
-            for (int i : koodi) {
-                sb.append(i);
-            }
-            System.out.println("");
-            txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
-            bArvaa.setEnabled(false);
-        } else {
         }
     }
 
@@ -150,6 +121,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             }
         });
 
+        txtInfo.setEditable(false);
         txtInfo.setText("Paina \"Aloita Peli\" - nappia");
 
         buttonGroup2.add(rbHelppoVersio);
@@ -330,7 +302,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     /**
      *
      * Koodin arvausnappi
+     * Luetaan käyttäjän valitsema koodi ja tarkistetaan se
      */
+
     private void bArvaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArvaaActionPerformed
 
         int arvauksiaJaljella = pelilauta.getRivajaJaljella();
@@ -350,7 +324,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         } else {
             jatkaPelia(pnl);
-
         }
 
     }//GEN-LAST:event_bArvaaActionPerformed
@@ -381,7 +354,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), rbHelppoVersio.isSelected());
 
-        pnl = (pnlRivi) annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
+        pnl = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
         pnl.aktiivinen(true);
     }
 
@@ -402,10 +375,10 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         bArvaa.setEnabled(true);
 
         for (int i = 1; i <= arvaustenMaxLkm; i++) {
-            pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi" + i);
+            pnlRivi r = annaPaneliNimella("pnlRivi" + i);
             r.alustaRivi(eriValintojenLkm);
         }
-        pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi" + arvaustenMaxLkm);
+        pnlRivi r = annaPaneliNimella("pnlRivi" + arvaustenMaxLkm);
         r.aktiivinen(true);
 
     }//GEN-LAST:event_bAloitaActionPerformed
