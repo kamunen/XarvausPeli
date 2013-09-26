@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Pelilauta implements java.io.Serializable{
     private int[] arvattavaKoodi;
-    private ArrayList rivit;
+    private ArrayList<Rivi> rivit;
     private PeliTapahtuma peliTapahtuma;
     
 /*
@@ -47,7 +47,7 @@ public class Pelilauta implements java.io.Serializable{
      */
     public Pelilauta(int[] koodi,int riviLkm){
         this.arvattavaKoodi = koodi;
-        rivit = new ArrayList();
+        rivit = new ArrayList<>();
         peliTapahtuma = new PeliTapahtuma();
         peliTapahtuma.setRivejaJaljella(riviLkm);
        
@@ -117,6 +117,6 @@ public class Pelilauta implements java.io.Serializable{
    public Rivi annaViimeisinRivi(){
        
        //TODO : Virheenkäsittely, jos lista on tyhjä
-       return (Rivi)rivit.get(rivit.size()-1);
+       return rivit.get(rivit.size()-1);
    }
  }

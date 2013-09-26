@@ -14,7 +14,7 @@ import logiikka.Rivi;
 public class GrafiikkaKaLi extends javax.swing.JFrame {
     
    private Pelilauta pelilauta;
-    private HashMap pnlRivit;
+   private HashMap<String,pnlRivi> pnlRivit;
     /**
      * Luo uuden ilmentymän
      */
@@ -24,18 +24,18 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     }
     
      private void teeRiviTaulukko(){
-         pnlRivit = new HashMap<String, pnlRivi>();
+         pnlRivit = new HashMap<>();
        
         for (Component c : getContentPane().getComponents()) {
                 if(c instanceof pnlRivi){
-                    pnlRivit.put(c.getName(), c);
+                    pnlRivit.put(c.getName(), (pnlRivi)c);
                 }
            }
     }
      
        public pnlRivi annaPaneliNimella(String nimi) {
         if (pnlRivit.containsKey(nimi)) {
-                return (pnlRivi) pnlRivit.get(nimi);
+                return pnlRivit.get(nimi);
         }
         else return null;
 }
@@ -363,26 +363,21 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
             
         }else{
-             pnl.aktiivinen(false);
-             
-             pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),jRadioButton1.isSelected());
-             
-            pnl = (pnlRivi) annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
-            pnl.aktiivinen(true);
+            t(pnl);
         
         }
-        
-            
-           
-        
-            
-        
-    
-        
-        
-        
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
+      private void t(pnlRivi pnl) {
+        pnl.aktiivinen(false);
+        
+        pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),jRadioButton1.isSelected());
+        
+       pnl = (pnlRivi) annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
+       pnl.aktiivinen(true);
+    }
+      
     /**
      * Pelin aloitusnappi
      * 
@@ -481,6 +476,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private kayttoliittyma.pnlRivi pnlRivi8;
     private kayttoliittyma.pnlRivi pnlRivi9;
     // End of variables declaration//GEN-END:variables
+
+  
 }
 
 
