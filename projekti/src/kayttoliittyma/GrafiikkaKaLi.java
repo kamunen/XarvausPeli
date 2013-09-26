@@ -52,8 +52,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         k.suorita();
 
         if (pelilauta.getOnkoRatkaistu()) {
-            jTextField1.setText("Oikain");
-            jButton1.setEnabled(false);
+            txtInfo.setText("Oikain");
+            bArvaa.setEnabled(false);
 
         } else if (!pelilauta.onkoArvauksiaJaljella()) {
             int[] koodi = pelilauta.getKoodi();
@@ -63,8 +63,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                 sb.append(i);
             }
             System.out.println("");
-            jTextField1.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
-            jButton1.setEnabled(false);
+            txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
+            bArvaa.setEnabled(false);
         } else {
         }
     }
@@ -90,15 +90,15 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         pnlRivi9 = new kayttoliittyma.pnlRivi();
         pnlRivi10 = new kayttoliittyma.pnlRivi();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        bArvaa = new javax.swing.JButton();
+        bLataaPelitilanne = new javax.swing.JButton();
+        bTallennaPelitilanne = new javax.swing.JButton();
+        txtInfo = new javax.swing.JTextField();
+        rbHelppoVersio = new javax.swing.JRadioButton();
+        rbHaasteellisempi = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        cbxVaihtoehtoja = new javax.swing.JComboBox();
+        bAloita = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
 
@@ -127,54 +127,54 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Toiminnot"));
 
-        jButton1.setText("Arvaa");
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bArvaa.setText("Arvaa");
+        bArvaa.setEnabled(false);
+        bArvaa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bArvaaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Lataa pelitilanne");
-        jButton4.setEnabled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        bLataaPelitilanne.setText("Lataa pelitilanne");
+        bLataaPelitilanne.setEnabled(false);
+        bLataaPelitilanne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                bLataaPelitilanneActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Tallenna pelitilanne");
-        jButton3.setEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bTallennaPelitilanne.setText("Tallenna pelitilanne");
+        bTallennaPelitilanne.setEnabled(false);
+        bTallennaPelitilanne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bTallennaPelitilanneActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("Paina \"Aloita Peli\" - nappia");
+        txtInfo.setText("Paina \"Aloita Peli\" - nappia");
 
-        buttonGroup2.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Helppo versio");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(rbHelppoVersio);
+        rbHelppoVersio.setSelected(true);
+        rbHelppoVersio.setText("Helppo versio");
+        rbHelppoVersio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rbHelppoVersioActionPerformed(evt);
             }
         });
 
-        buttonGroup2.add(jRadioButton2);
-        jRadioButton2.setText("Haasteellisempi");
+        buttonGroup2.add(rbHaasteellisempi);
+        rbHaasteellisempi.setText("Haasteellisempi");
 
         jLabel3.setText("Vaihtoehtoja merkille");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        jComboBox1.setSelectedIndex(4);
-        jComboBox1.setName(""); // NOI18N
+        cbxVaihtoehtoja.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxVaihtoehtoja.setSelectedIndex(4);
+        cbxVaihtoehtoja.setName(""); // NOI18N
 
-        jButton2.setText("Aloita Peli");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bAloita.setText("Aloita Peli");
+        bAloita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bAloitaActionPerformed(evt);
             }
         });
 
@@ -186,13 +186,13 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(bTallennaPelitilanne)
+                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 42, 42))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,50 +201,50 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxVaihtoehtoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bAloita)
                 .addGap(46, 46, 46))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1)))
+                            .addComponent(rbHaasteellisempi)
+                            .addComponent(rbHelppoVersio)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jRadioButton1)
+                .addComponent(rbHelppoVersio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(rbHaasteellisempi)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxVaihtoehtoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(bLataaPelitilanne)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(bTallennaPelitilanne)
                                 .addGap(79, 79, 79))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jButton2)
+                        .addComponent(bAloita)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -332,10 +332,10 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
      * 
      * Koodin arvausnappi 
      */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bArvaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArvaaActionPerformed
         
         int arvauksiaJaljella = pelilauta.getRivajaJaljella();
-        jTextField1.setText("Arvauksia jäljellä : "+ (arvauksiaJaljella - 1) );
+        txtInfo.setText("Arvauksia jäljellä : "+ (arvauksiaJaljella - 1) );
         
         pnlRivi pnl = annaPaneliNimella("pnlRivi"+arvauksiaJaljella);
     
@@ -343,8 +343,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         k.suorita();
 
         if (pelilauta.getOnkoRatkaistu()) {
-            jTextField1.setText("Oikain");
-            jButton1.setEnabled(false);
+            txtInfo.setText("Oikain");
+            bArvaa.setEnabled(false);
             pnl.aktiivinen(false);
             pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
          
@@ -357,8 +357,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                 sb.append(i);
             }
             System.out.println("");
-            jTextField1.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
-            jButton1.setEnabled(false);
+            txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
+            bArvaa.setEnabled(false);
             pnl.aktiivinen(false);
             pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),true);
             
@@ -367,12 +367,12 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         
         }
       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bArvaaActionPerformed
 
       private void t(pnlRivi pnl) {
         pnl.aktiivinen(false);
         
-        pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),jRadioButton1.isSelected());
+        pnl.asetaTarkistus( pelilauta.annaViimeisinRivi(),rbHelppoVersio.isSelected());
         
        pnl = (pnlRivi) annaPaneliNimella("pnlRivi"+pelilauta.getRivajaJaljella());
        pnl.aktiivinen(true);
@@ -382,17 +382,17 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
      * Pelin aloitusnappi
      * 
      */
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bAloitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAloitaActionPerformed
         int eriValintojenLkm;
         int koodinPituus = 4;
         int arvaustenMaxLkm = 10;
         
-        eriValintojenLkm = Integer.parseInt(jComboBox1.getSelectedItem().toString());
+        eriValintojenLkm = Integer.parseInt(cbxVaihtoehtoja.getSelectedItem().toString());
         
         pelilauta = new Pelilauta(koodinPituus,eriValintojenLkm,arvaustenMaxLkm);
         
-        jTextField1.setText("Valitse koodi");
-        jButton1.setEnabled(true);
+        txtInfo.setText("Valitse koodi");
+        bArvaa.setEnabled(true);
         
         for (int i = 1; i <= arvaustenMaxLkm; i++) {
             pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi"+i);
@@ -401,19 +401,19 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
            pnlRivi r = (pnlRivi) annaPaneliNimella("pnlRivi"+arvaustenMaxLkm);
            r.aktiivinen(true);
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bAloitaActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        jRadioButton1.setSelected(true);
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void rbHelppoVersioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHelppoVersioActionPerformed
+        rbHelppoVersio.setSelected(true);
+    }//GEN-LAST:event_rbHelppoVersioActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTextField1.setText("Toimintoa ei ole toteutettu");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void bTallennaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTallennaPelitilanneActionPerformed
+        txtInfo.setText("Toimintoa ei ole toteutettu");
+    }//GEN-LAST:event_bTallennaPelitilanneActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         jTextField1.setText("Toimintoa ei ole toteutettu");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void bLataaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLataaPelitilanneActionPerformed
+         txtInfo.setText("Toimintoa ei ole toteutettu");
+    }//GEN-LAST:event_bLataaPelitilanneActionPerformed
 
     
     public void kaynnista() {
@@ -452,19 +452,16 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAloita;
+    private javax.swing.JButton bArvaa;
+    private javax.swing.JButton bLataaPelitilanne;
+    private javax.swing.JButton bTallennaPelitilanne;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox cbxVaihtoehtoja;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
     private kayttoliittyma.pnlRivi pnlRivi1;
     private kayttoliittyma.pnlRivi pnlRivi10;
     private kayttoliittyma.pnlRivi pnlRivi2;
@@ -475,6 +472,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private kayttoliittyma.pnlRivi pnlRivi7;
     private kayttoliittyma.pnlRivi pnlRivi8;
     private kayttoliittyma.pnlRivi pnlRivi9;
+    private javax.swing.JRadioButton rbHaasteellisempi;
+    private javax.swing.JRadioButton rbHelppoVersio;
+    private javax.swing.JTextField txtInfo;
     // End of variables declaration//GEN-END:variables
 
   
