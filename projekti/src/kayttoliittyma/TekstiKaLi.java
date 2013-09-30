@@ -2,7 +2,6 @@ package kayttoliittyma;
 
 import java.util.Scanner;
 import logiikka.Pelilauta;
-import java.util.Random;
 import logiikka.*;
 import tiedosto.Tiedosto;
 

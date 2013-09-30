@@ -6,6 +6,7 @@ import java.util.HashMap;
 import logiikka.ArvaaKoodi;
 import logiikka.Komento;
 import logiikka.Pelilauta;
+import logiikka.Rivi;
 
 /**
  * Pelin graafinen käyttöliittymä
@@ -350,11 +351,13 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     }
 
     private void jatkaPelia(pnlRivi pnl) {
+        Rivi r = pelilauta.annaViimeisinRivi();
+
+        pnl.asetaTarkistus(r, rbHelppoVersio.isSelected());
         pnl.aktiivinen(false);
-
-        pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), rbHelppoVersio.isSelected());
-
+        
         pnl = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
+        pnl.asetaRivi(r, false, false);
         pnl.aktiivinen(true);
     }
 

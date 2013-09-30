@@ -66,41 +66,57 @@ public class pnlRivi extends javax.swing.JPanel {
                 + r.getMukanaLkm() + " oikeaa merkkiä");
 
         if (osoitaPaikat) {
-            char[] tarkistus = r.getTarkistus();
-            java.awt.Color punainen = new Color(255, 0, 0);
-            java.awt.Color valkoinen = new Color(255, 255, 255);
+            lisaaVarit(r);
+        }
+    }
+    
+      private void lisaaVarit(Rivi r) {
+        char[] tarkistus = r.getTarkistus();
+        java.awt.Color punainen = new Color(255, 0, 0);
+        java.awt.Color valkoinen = new Color(255, 255, 255);
 
-            if (tarkistus[0] == Rivi.LOYDETTY) {
-                jComboBox1.setBorder(new javax.swing.border.LineBorder(
-                        punainen, 3, true));
-            } else if (tarkistus[0] == Rivi.MUKANA) {
-                jComboBox1.setBorder(new javax.swing.border.LineBorder(
-                        valkoinen, 3, true));
-            }
+        if (tarkistus[0] == Rivi.LOYDETTY) {
+            jComboBox1.setBorder(new javax.swing.border.LineBorder(
+                    punainen, 3, true));
+        } else if (tarkistus[0] == Rivi.MUKANA) {
+            jComboBox1.setBorder(new javax.swing.border.LineBorder(
+                    valkoinen, 3, true));
+        } else{
+            jComboBox1.setBorder(new javax.swing.border.LineBorder(
+                new Color(0, 0, 0), 1, true));
+        }
 
-            if (tarkistus[1] == Rivi.LOYDETTY) {
-                jComboBox2.setBorder(new javax.swing.border.LineBorder(
-                        punainen, 3, true));
-            } else if (tarkistus[1] == Rivi.MUKANA) {
-                jComboBox2.setBorder(new javax.swing.border.LineBorder(
-                        valkoinen, 3, true));
-            }
+        if (tarkistus[1] == Rivi.LOYDETTY) {
+            jComboBox2.setBorder(new javax.swing.border.LineBorder(
+                    punainen, 3, true));
+        } else if (tarkistus[1] == Rivi.MUKANA) {
+            jComboBox2.setBorder(new javax.swing.border.LineBorder(
+                    valkoinen, 3, true));
+        } else{
+            jComboBox2.setBorder(new javax.swing.border.LineBorder(
+                new Color(0, 0, 0), 1, true));
+        }
 
-            if (tarkistus[2] == Rivi.LOYDETTY) {
-                jComboBox3.setBorder(new javax.swing.border.LineBorder(
-                        punainen, 3, true));
-            } else if (tarkistus[2] == Rivi.MUKANA) {
-                jComboBox3.setBorder(new javax.swing.border.LineBorder(
-                        valkoinen, 3, true));
-            }
+        if (tarkistus[2] == Rivi.LOYDETTY) {
+            jComboBox3.setBorder(new javax.swing.border.LineBorder(
+                    punainen, 3, true));
+        } else if (tarkistus[2] == Rivi.MUKANA) {
+            jComboBox3.setBorder(new javax.swing.border.LineBorder(
+                    valkoinen, 3, true));
+        }else{
+            jComboBox3.setBorder(new javax.swing.border.LineBorder(
+                new Color(0, 0, 0), 1, true));
+        }
 
-            if (tarkistus[3] == Rivi.LOYDETTY) {
-                jComboBox4.setBorder(new javax.swing.border.LineBorder(
-                        punainen, 3, true));
-            } else if (tarkistus[3] == Rivi.MUKANA) {
-                jComboBox4.setBorder(new javax.swing.border.LineBorder(
-                        valkoinen, 3, true));
-            }
+        if (tarkistus[3] == Rivi.LOYDETTY) {
+            jComboBox4.setBorder(new javax.swing.border.LineBorder(
+                    punainen, 3, true));
+        } else if (tarkistus[3] == Rivi.MUKANA) {
+            jComboBox4.setBorder(new javax.swing.border.LineBorder(
+                    valkoinen, 3, true));
+        }else{
+            jComboBox4.setBorder(new javax.swing.border.LineBorder(
+                new Color(0, 0, 0), 1, true));
         }
     }
 
@@ -119,6 +135,29 @@ public class pnlRivi extends javax.swing.JPanel {
         arvaus[3] = Integer.parseInt(jComboBox4.getSelectedItem().toString());
 
         return arvaus;
+    }
+    
+    /**
+     * Asetetaan paneeliin rivi
+     * @param r Rivi
+     * @param osoitaPaikat näytetäänkö merkin paikat
+     * @param asetaTeksti asetetaanko tekstikentän arvo
+     */
+    public void asetaRivi(Rivi r, boolean osoitaPaikat, boolean asetaTeksti) {
+        int[] arvaus = r.getArvaus();
+        jComboBox1.setSelectedIndex(arvaus[0]);
+        jComboBox2.setSelectedIndex(arvaus[1]);
+        jComboBox3.setSelectedIndex(arvaus[2]);
+        jComboBox4.setSelectedIndex(arvaus[3]);
+
+        if (osoitaPaikat) {
+            lisaaVarit(r);
+        }
+        if (asetaTeksti) {
+            jTextField1.setText(r.getOikeinLkm() + " oikealla paikalla ja "
+                    + r.getMukanaLkm() + " oikeaa merkkiä");
+
+        }
     }
 
     /**
@@ -193,4 +232,6 @@ public class pnlRivi extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+  
 }
