@@ -16,7 +16,7 @@ public class TekstiKaLi {
     }
 
     public void kaynnista() {
-        int koodinPituus = 2;
+        int koodinPituus = 3;
         int arvaustenLkm = 5;
         int eriMerkkeja = 5;
 
@@ -63,9 +63,23 @@ public class TekstiKaLi {
             }
 
             try {
+                if (s.startsWith("-")){
+                    throw new Exception("Miinusmerkki / Tavuviiva ei käy!");
+                } 
+                if (s.length()!=koodinPituus){
+                    throw new Exception("Anna täsmälleen "+koodinPituus+" merkkiä");
+                }
+                
                 Integer.parseInt(s);
+                
+                
+            }catch (NumberFormatException ex){
+                System.out.println("Ei käy! Anna vain numeroita");
+                System.out.println("");
+                continue;
+                
             } catch (Exception e) {
-                System.out.println("Ei käy! Koodi liian pitkä / Anna vain numeroita");
+                System.out.println("Virhe! : "+e.getMessage());
                 System.out.println("");
                 continue;
             }

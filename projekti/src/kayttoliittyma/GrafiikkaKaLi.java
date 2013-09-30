@@ -374,7 +374,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         pelilauta = new Pelilauta(koodinPituus, eriValintojenLkm, arvaustenMaxLkm);
 
-        txtInfo.setText("Valitse koodi");
+        txtInfo.setText("");
         bArvaa.setEnabled(true);
 
         for (int i = 1; i <= arvaustenMaxLkm; i++) {
