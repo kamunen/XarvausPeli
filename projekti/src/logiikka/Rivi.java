@@ -68,6 +68,12 @@ public class Rivi implements java.io.Serializable {
      */
     public void tarkista(int[] koodi) {
 
+        //Nollataan luokkamuuttujat varmuuden vuoksi
+        // jos käy niin, että rivi tarkistetaan kahteen kertaan
+        
+        oikeinLkm=0;
+        mukanaLkm=0;
+        
         //Lasketaan koodissa olevien lukujen kappalemäärä
 
         int[] lkm = new int[10];
@@ -81,7 +87,7 @@ public class Rivi implements java.io.Serializable {
                 tulos[i] = LOYDETTY;
                 lkm[koodi[i]]--;
                 oikeinLkm++;
-            }
+            } 
 
         }
         //Etsitään ne, jotka eivät ole oikealla paikalla
