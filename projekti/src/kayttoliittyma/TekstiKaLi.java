@@ -104,7 +104,8 @@ public class TekstiKaLi {
         }
         if (pelilauta.getOnkoRatkaistu()) {
             System.out.println("Hienoa! Ratkaisu löytyi");
-        } else {
+        } else if (!pelilauta.onkoArvauksiaJaljella()) {
+            System.out.println("Arvaukset käytetty!");
             naytaKoodi();
         }
     }
