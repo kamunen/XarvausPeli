@@ -4,6 +4,7 @@ package tiedosto;
  * Luokka pelitilanteen tallettamista ja uudelleen lataamista varten
  *
  */
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,9 +28,11 @@ public class Tiedosto {
      * @throws Exception
      */
     public void talletaPeli(String nimi, Pelilauta p) throws Exception {
-        FileOutputStream out = new FileOutputStream(nimi);
-        ObjectOutputStream obs = new ObjectOutputStream(out);
-        obs.writeObject(p);
+        try (FileOutputStream out = new FileOutputStream(nimi); 
+                ObjectOutputStream obs = new ObjectOutputStream(out)) {
+            obs.writeObject(p);
+        }
+        
     }
 
     /**
@@ -40,17 +43,27 @@ public class Tiedosto {
      * @throws Exception
      */
     public Pelilauta lataaPeli(String nimi) throws Exception {
-        FileInputStream in = new FileInputStream(nimi);
-        ObjectInputStream obs = new ObjectInputStream(in);
-        Object o = obs.readObject();
-
+        Object o;
+        try (FileInputStream in = new FileInputStream(nimi); 
+                ObjectInputStream obs = new ObjectInputStream(in)) {
+            o = obs.readObject();
+        }
+        
         if (o instanceof Pelilauta) {
             return (Pelilauta) o;
+            
         }
         return null;
 
     }
-
+    
+    public boolean onkoPelitilanneTallessa(String nimi)throws Exception{
+       return new File(nimi).exists(); 
+    }
+    
+    public boolean poistaTiedosto(String nimi)throws Exception{
+        return new File(nimi).delete();
+    }
     /**
      * Luetaan konfigurointitiot (Ei kytketty mihinkään toimintoon)
      *

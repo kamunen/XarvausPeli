@@ -7,6 +7,7 @@ import logiikka.ArvaaKoodi;
 import logiikka.Komento;
 import logiikka.Pelilauta;
 import logiikka.Rivi;
+import tiedosto.Tiedosto;
 
 /**
  * Pelin graafinen käyttöliittymä
@@ -15,6 +16,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
     private Pelilauta pelilauta;
     private HashMap<String, pnlRivi> pnlRivit;
+    
+    private final String TIEDOSTO = "peli.dat";
+    
 
     /**
      * Luo uuden ilmentymän
@@ -22,6 +26,21 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     public GrafiikkaKaLi() {
         initComponents();
         teeRiviTaulukko();
+        aktivoiLatausNappi();
+        
+        
+    }
+     private void aktivoiLatausNappi() {
+        try{
+            Tiedosto t = new Tiedosto();
+            boolean latausMahdollista = t.onkoPelitilanneTallessa(TIEDOSTO);
+            bLataaPelitilanne.setEnabled(latausMahdollista);
+           
+        }
+            catch (Exception e){
+                System.out.println(e.toString());
+                txtInfo.setText("Levyn luku ei onnistu!");
+            }
     }
 
     private void teeRiviTaulukko() {
@@ -106,7 +125,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             }
         });
 
-        bLataaPelitilanne.setText("Lataa pelitilanne");
+        bLataaPelitilanne.setText("Lataa tallennettu\n pelitilanne");
         bLataaPelitilanne.setEnabled(false);
         bLataaPelitilanne.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +142,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         });
 
         txtInfo.setEditable(false);
-        txtInfo.setText("Paina \"Aloita Peli\" - nappia");
 
         buttonGroup2.add(rbHelppoVersio);
         rbHelppoVersio.setSelected(true);
@@ -154,70 +172,52 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bTallennaPelitilanne)
-                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(42, 42, 42))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(cbxVaihtoehtoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bAloita)
-                .addGap(46, 46, 46))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbHaasteellisempi)
-                            .addComponent(rbHelppoVersio)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(bTallennaPelitilanne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(cbxVaihtoehtoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addComponent(bAloita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(rbHelppoVersio)
+                    .addComponent(rbHaasteellisempi))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rbHelppoVersio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(3, 3, 3)
                 .addComponent(rbHaasteellisempi)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbxVaihtoehtoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bLataaPelitilanne)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(bTallennaPelitilanne)
-                                .addGap(79, 79, 79))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(bAloita)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxVaihtoehtoja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bAloita))
+                .addGap(41, 41, 41)
+                .addComponent(txtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(bLataaPelitilanne)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bTallennaPelitilanne))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pelitilanne"));
@@ -248,16 +248,16 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlRivi3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlRivi5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlRivi3, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                    .addComponent(pnlRivi1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pnlRivi5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -308,6 +308,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
     private void bArvaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArvaaActionPerformed
 
+        bTallennaPelitilanne.setEnabled(true);
+       
         int arvauksiaJaljella = pelilauta.getRivajaJaljella();
         txtInfo.setText("Arvauksia jäljellä : " + (arvauksiaJaljella - 1));
 
@@ -318,7 +320,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         if (pelilauta.getOnkoRatkaistu()) {
             koodiLoytyi(pnl);
-
 
         } else if (!pelilauta.onkoArvauksiaJaljella()) {
             arvauksetKaytetty(pnl);
@@ -332,6 +333,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private void koodiLoytyi(pnlRivi pnl) {
         txtInfo.setText("Oikein !");
         bArvaa.setEnabled(false);
+        bTallennaPelitilanne.setEnabled(false);
         pnl.aktiivinen(false);
         pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), true);
     }
@@ -346,6 +348,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         System.out.println("");
         txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
         bArvaa.setEnabled(false);
+        bTallennaPelitilanne.setEnabled(false);
         pnl.aktiivinen(false);
         pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), true);
     }
@@ -391,11 +394,66 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     }//GEN-LAST:event_rbHelppoVersioActionPerformed
 
     private void bTallennaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTallennaPelitilanneActionPerformed
-        txtInfo.setText("Toimintoa ei ole toteutettu");
+        Tiedosto t = new Tiedosto();
+        try{
+            t.talletaPeli(TIEDOSTO, pelilauta);
+            txtInfo.setText("Pelitilanne talletettu");
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+            txtInfo.setText("Tallennus ei onnistu!");
+        }
+       
     }//GEN-LAST:event_bTallennaPelitilanneActionPerformed
 
     private void bLataaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLataaPelitilanneActionPerformed
-        txtInfo.setText("Toimintoa ei ole toteutettu");
+        Tiedosto t = new Tiedosto();
+        try {
+            pelilauta = t.lataaPeli(TIEDOSTO);
+
+            //index0 = 2, index1 = 3 jne..
+            cbxVaihtoehtoja.setSelectedIndex(pelilauta.getVaihtoehtojenLkm() - 2);
+
+            txtInfo.setText("");
+            bArvaa.setEnabled(true);
+
+            //Alustetaan rivit nolliksi
+            for (int i = 1; i <= 10; i++) {
+                pnlRivi r = annaPaneliNimella("pnlRivi" + i);
+                r.alustaRivi(pelilauta.getVaihtoehtojenLkm());
+
+            }
+            pnlRivi r = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
+            r.asetaRivi(pelilauta.annaViimeisinRivi(),rbHelppoVersio.isSelected(),false);
+            r.aktiivinen(true);
+
+
+            // Täytetään jo arvatut rivit
+            int i = 10;
+            for (Object o : pelilauta.getRivit()) {
+                Rivi r2 = (Rivi) o;
+                pnlRivi pnlR = annaPaneliNimella("pnlRivi" + i);
+                pnlR.asetaRivi(r2, rbHelppoVersio.isSelected(), true);
+                i--;
+            }
+            int arvauksiaJaljella = pelilauta.getRivajaJaljella();
+            txtInfo.setText("Arvauksia jäljellä : " + (arvauksiaJaljella));
+            bLataaPelitilanne.setEnabled(false);
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            txtInfo.setText("Lataus ei onnistunut!");
+        }
+        
+        //Kun lataus onnistuu niin poistetaan faili, ettei voi ladata uudelleen
+        
+        try {
+            t.poistaTiedosto(TIEDOSTO);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            txtInfo.setText("Ongelma! ");
+        }
+        
     }//GEN-LAST:event_bLataaPelitilanneActionPerformed
 
     public void kaynnista() {
@@ -458,4 +516,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbHelppoVersio;
     private javax.swing.JTextField txtInfo;
     // End of variables declaration//GEN-END:variables
+
+   
 }

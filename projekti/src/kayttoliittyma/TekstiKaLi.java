@@ -53,6 +53,7 @@ public class TekstiKaLi {
                 Tiedosto l = new Tiedosto();
                 try {
                     pelilauta = l.lataaPeli("peli.dat");
+                    System.out.println("Edelliset arvaukset");
                     System.out.println(pelilauta.getRivit());
                 } catch (Exception e) {
                     System.out.println(e.toString());

@@ -16,6 +16,7 @@ public class Pelilauta implements java.io.Serializable{
     private int[] arvattavaKoodi;
     private ArrayList<Rivi> rivit;
     private PeliTapahtuma peliTapahtuma;
+    private int vaihtoehtojenLkm;
     
 /*
  * Luo tyhjän pelilaudan
@@ -37,7 +38,7 @@ public class Pelilauta implements java.io.Serializable{
         rivit = new ArrayList();
         peliTapahtuma = new PeliTapahtuma();
         peliTapahtuma.setRivejaJaljella(riviLkm);
-        
+        this.vaihtoehtojenLkm = vaihtoehtojenLkm;
     }
     
     /**
@@ -119,4 +120,11 @@ public class Pelilauta implements java.io.Serializable{
        //TODO : Virheenkäsittely, jos lista on tyhjä
        return rivit.get(rivit.size()-1);
    }
+
+    /**
+     * @return the vaihtoehtojenLkm
+     */
+    public int getVaihtoehtojenLkm() {
+        return vaihtoehtojenLkm;
+    }
  }

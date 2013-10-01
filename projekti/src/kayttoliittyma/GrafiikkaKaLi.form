@@ -33,16 +33,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlRivi3" max="32767" attributes="0"/>
-                  <Component id="pnlRivi1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi4" max="32767" attributes="0"/>
-                  <Component id="pnlRivi10" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi9" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi6" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi7" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi8" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRivi5" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi3" pref="633" max="32767" attributes="0"/>
+                  <Component id="pnlRivi1" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi2" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi4" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi10" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi9" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi6" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi7" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi8" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnlRivi5" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -154,53 +154,35 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="bArvaa" min="-2" pref="79" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="bTallennaPelitilanne" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="bLataaPelitilanne" alignment="1" min="-2" pref="123" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bArvaa" min="-2" pref="79" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="bLataaPelitilanne" alignment="1" pref="180" max="32767" attributes="0"/>
+                              <Component id="bTallennaPelitilanne" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Component id="cbxVaihtoehtoja" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="bAloita" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="txtInfo" alignment="0" min="-2" pref="273" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="bAloita" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="rbHaasteellisempi" min="-2" max="-2" attributes="0"/>
-                              <Component id="rbHelppoVersio" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtInfo" min="-2" pref="273" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbHelppoVersio" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbHaasteellisempi" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -209,36 +191,25 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="rbHelppoVersio" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="rbHaasteellisempi" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cbxVaihtoehtoja" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtInfo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="bLataaPelitilanne" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="bTallennaPelitilanne" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="bArvaa" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Component id="bAloita" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbxVaihtoehtoja" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bAloita" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="txtInfo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <Component id="bLataaPelitilanne" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="bArvaa" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="bTallennaPelitilanne" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -255,7 +226,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="bLataaPelitilanne">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lataa pelitilanne"/>
+            <Property name="text" type="java.lang.String" value="Lataa tallennettu&#xa; pelitilanne"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -274,7 +245,6 @@
         <Component class="javax.swing.JTextField" name="txtInfo">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Paina &quot;Aloita Peli&quot; - nappia"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbHelppoVersio">
