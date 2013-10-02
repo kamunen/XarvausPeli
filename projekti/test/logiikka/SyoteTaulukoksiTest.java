@@ -43,13 +43,13 @@ public class SyoteTaulukoksiTest {
      @Test
      public void liianPitkaSyotePalauttaaFalse() {
          
-          String s ="1234";
+          String s ="12345";
           assertEquals(false, st.validoiSyote(s,4));
     }
      @Test
      public void liianLyhytSyotePalauttaaFalse(){
           
-          String s ="1234";
+          String s ="123";
           assertEquals(false, st.validoiSyote(s,4));
      }
      @Test

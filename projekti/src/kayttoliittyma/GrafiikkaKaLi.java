@@ -27,6 +27,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         initComponents();
         teeRiviTaulukko();
         aktivoiLatausNappi();
+      
         
         
     }
@@ -69,6 +70,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnlRivi1 = new kayttoliittyma.pnlRivi();
         pnlRivi2 = new kayttoliittyma.pnlRivi();
         pnlRivi3 = new kayttoliittyma.pnlRivi();
@@ -90,7 +92,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         cbxVaihtoehtoja = new javax.swing.JComboBox();
         bAloita = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        rbYksinpeli = new javax.swing.JRadioButton();
+        rbKaksinpeli = new javax.swing.JRadioButton();
+        pnlTulostaulu1 = new kayttoliittyma.pnlTulostaulu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Arvaa piilossa oleva koodi (MasterMind - peli)");
@@ -179,7 +183,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                         .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                             .addComponent(bTallennaPelitilanne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -220,26 +224,43 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pelitilanne"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pelitapa"));
 
-        jCheckBox1.setText("Kaksinpeli");
-        jCheckBox1.setEnabled(false);
+        buttonGroup1.add(rbYksinpeli);
+        rbYksinpeli.setSelected(true);
+        rbYksinpeli.setText("Yksinpeli");
+        rbYksinpeli.setEnabled(false);
+        rbYksinpeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbYksinpeliActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rbKaksinpeli);
+        rbKaksinpeli.setText("Kaksinpeli");
+        rbKaksinpeli.setEnabled(false);
+        rbKaksinpeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbKaksinpeliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jCheckBox1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addComponent(rbYksinpeli)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rbKaksinpeli)
+                .addGap(38, 38, 38))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1)
-                .addContainerGap(137, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(rbYksinpeli)
+                .addComponent(rbKaksinpeli))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,7 +269,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlRivi3, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                    .addComponent(pnlRivi3, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addComponent(pnlRivi1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(pnlRivi2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(pnlRivi4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -261,23 +282,22 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlTulostaulu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
                         .addComponent(pnlRivi1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlRivi2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlRivi2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlTulostaulu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlRivi3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -293,7 +313,12 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnlRivi9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlRivi10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlRivi10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -386,6 +411,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         }
         pnlRivi r = annaPaneliNimella("pnlRivi" + arvaustenMaxLkm);
         r.aktiivinen(true);
+         txtInfo.setText("Arvauksia jäljellä : " + (arvaustenMaxLkm));
 
     }//GEN-LAST:event_bAloitaActionPerformed
 
@@ -456,6 +482,14 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bLataaPelitilanneActionPerformed
 
+    private void rbKaksinpeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKaksinpeliActionPerformed
+        pnlTulostaulu1.setVisible(true);
+    }//GEN-LAST:event_rbKaksinpeliActionPerformed
+
+    private void rbYksinpeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbYksinpeliActionPerformed
+         pnlTulostaulu1.setVisible(false);
+    }//GEN-LAST:event_rbYksinpeliActionPerformed
+
     public void kaynnista() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -496,9 +530,9 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private javax.swing.JButton bArvaa;
     private javax.swing.JButton bLataaPelitilanne;
     private javax.swing.JButton bTallennaPelitilanne;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox cbxVaihtoehtoja;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -512,8 +546,11 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private kayttoliittyma.pnlRivi pnlRivi7;
     private kayttoliittyma.pnlRivi pnlRivi8;
     private kayttoliittyma.pnlRivi pnlRivi9;
+    private kayttoliittyma.pnlTulostaulu pnlTulostaulu1;
     private javax.swing.JRadioButton rbHaasteellisempi;
     private javax.swing.JRadioButton rbHelppoVersio;
+    private javax.swing.JRadioButton rbKaksinpeli;
+    private javax.swing.JRadioButton rbYksinpeli;
     private javax.swing.JTextField txtInfo;
     // End of variables declaration//GEN-END:variables
 
