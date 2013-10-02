@@ -26,10 +26,6 @@ public class TekstiKaLi {
 
         pelilauta = new Pelilauta(koodinPituus, eriMerkkeja, arvaustenLkm);
 
-        System.out.println("(q - kirjain lopettaa)");
-        System.out.println("(t - tallettaa)");
-        System.out.println("(l - kirjain lataa)");
-
         System.out.println("");
         while (pelilauta.onkoArvauksiaJaljella()) {
             System.out.println("Arvaa koodi : ");
@@ -63,39 +59,50 @@ public class TekstiKaLi {
                 continue;
             }
 
-            try {
-                if (s.startsWith("-")){
-                    throw new Exception("Miinusmerkki / Tavuviiva ei käy!");
-                } 
-                if (s.length()!=koodinPituus){
-                    throw new Exception("Anna täsmälleen "+koodinPituus+" merkkiä");
-                }
-                
-                Integer.parseInt(s);
-                
-                
-            }catch (NumberFormatException ex){
-                System.out.println("Ei käy! Anna vain numeroita");
-                System.out.println("");
-                continue;
-                
-            } catch (Exception e) {
-                System.out.println("Virhe! : "+e.getMessage());
+            //Siirretetty luokkaan SyoteTaulukoksi
+//            try {
+//                if (s.startsWith("-")){
+//                    throw new Exception("Miinusmerkki / Tavuviiva ei käy!");
+//                } 
+//                if (s.length()!=koodinPituus){
+//                    throw new Exception("Anna täsmälleen "+koodinPituus+" merkkiä");
+//                }
+//                
+//                Integer.parseInt(s);
+//                
+//                
+//            }catch (NumberFormatException ex){
+//                System.out.println("Ei käy! Anna vain numeroita");
+//                System.out.println("");
+//                continue;
+//                
+//            } catch (Exception e) {
+//                System.out.println("Virhe! : "+e.getMessage());
+//                System.out.println("");
+//                continue;
+//            }
+//
+//            int[] arvaus = new int[koodinPituus];
+//
+//            for (int i = 0; i < s.length(); i++) {
+//                if (i == koodinPituus) {
+//                    break;
+//                }
+//                StringBuilder sb = new StringBuilder();
+//                sb.append(s.charAt(i));
+//                arvaus[i] = Integer.parseInt(sb.toString());
+//            }
+
+            SyoteTaulukoksi st = new SyoteTaulukoksi();
+            st.setMaxNro(eriMerkkeja);
+
+            if (!st.validoiSyote(s, koodinPituus)) {
+                System.out.println(st.getViesti());
                 System.out.println("");
                 continue;
             }
 
-            int[] arvaus = new int[koodinPituus];
-
-            for (int i = 0; i < s.length(); i++) {
-                if (i == koodinPituus) {
-                    break;
-                }
-                StringBuilder sb = new StringBuilder();
-                sb.append(s.charAt(i));
-                arvaus[i] = Integer.parseInt(sb.toString());
-            }
-            Komento k = new ArvaaKoodi(arvaus, pelilauta);
+            Komento k = new ArvaaKoodi(st.getKoodi(), pelilauta);
             k.suorita();
             Rivi r = pelilauta.annaViimeisinRivi();
             System.out.println(r);
@@ -103,6 +110,7 @@ public class TekstiKaLi {
             System.out.println("");
 
         }
+
         if (pelilauta.getOnkoRatkaistu()) {
             System.out.println("Hienoa! Ratkaisu löytyi");
         } else if (!pelilauta.onkoArvauksiaJaljella()) {
@@ -115,7 +123,9 @@ public class TekstiKaLi {
         System.out.println("********************");
         System.out.println(" XArvausPeli (MasterMind)");
         System.out.println("");
-        System.out.println("Arvaustoiminnallisuuden kokeilua");
+        System.out.println("(q - kirjain lopettaa)");
+        System.out.println("(t - tallettaa)");
+        System.out.println("(l - kirjain lataa)");
         System.out.println("*********************");
 
     }
