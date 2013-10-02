@@ -127,5 +127,4 @@ public class Pelilauta implements java.io.Serializable{
     public int getVaihtoehtojenLkm() {
         return vaihtoehtojenLkm;
     }
-   
- }
+}
