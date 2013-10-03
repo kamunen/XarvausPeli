@@ -92,10 +92,15 @@ public class Rivi implements java.io.Serializable {
         }
         //Etsitään ne, jotka eivät ole oikealla paikalla
 
+        //Jos oli jo oikea merkki niin siirrytään seuraavaan
         for (int i = 0; i < koodi.length; i++) {
             if (tulos[i] == LOYDETTY) {
                 continue;
             }
+            // Loopataan arvaus alusta lähtien ja  katsotaan onko jokin
+            // arvatuista merkeistä tässä kohtaa.
+            // Jos on niin siirrytään seuraavaan merkkiin
+            // Kukin merkki lasketaan vain kertaalleen
             for (int j = 0; j < arvaus.length; j++) {
                 if (koodi[j] == arvaus[i] && lkm[koodi[j]] > 0) {
                     tulos[i] = MUKANA;
