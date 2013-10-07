@@ -27,6 +27,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         initComponents();
         teeRiviTaulukko();
         aktivoiLatausNappi();
+        pnlTulostaulu1.setVisible(false);
       
         
         
@@ -229,7 +230,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         buttonGroup1.add(rbYksinpeli);
         rbYksinpeli.setSelected(true);
         rbYksinpeli.setText("Yksinpeli");
-        rbYksinpeli.setEnabled(false);
         rbYksinpeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbYksinpeliActionPerformed(evt);
@@ -238,7 +238,6 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         buttonGroup1.add(rbKaksinpeli);
         rbKaksinpeli.setText("Kaksinpeli");
-        rbKaksinpeli.setEnabled(false);
         rbKaksinpeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbKaksinpeliActionPerformed(evt);
