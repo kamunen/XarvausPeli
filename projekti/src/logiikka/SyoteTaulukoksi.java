@@ -23,9 +23,8 @@ public class SyoteTaulukoksi {
     public boolean validoiSyote(String s,int koodinPituus){
                 
          try {
-                if (s.startsWith("-")){
-                    viesti = "Miinusmerkki / Tavuviiva ei käy!";
-                    return false;
+                if (s.startsWith("-") || s.startsWith("+")){
+                    throw new NumberFormatException();
                 } 
                 if (s.length()!=koodinPituus){
                     viesti = "Anna täsmälleen "+koodinPituus+" merkkiä";

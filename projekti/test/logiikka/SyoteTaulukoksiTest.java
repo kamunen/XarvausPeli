@@ -72,4 +72,15 @@ public class SyoteTaulukoksiTest {
          String s="-423";
          assertEquals(false, st.validoiSyote(s,4));
      }
+     @Test 
+     public void plusMerkkiPalauttaaFalse(){
+         String s = "+432";
+          assertEquals(false, st.validoiSyote(s,4));
+     }
+     @Test
+     public void kenoTPalauttaaFalse(){
+         String s = "\t123";
+          assertEquals(false, st.validoiSyote(s,4));
+     
+     }
 }
