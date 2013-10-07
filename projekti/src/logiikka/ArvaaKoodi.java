@@ -1,7 +1,8 @@
+package logiikka;
+
 /**
  * Luokka toteuttaa koodinarvaus käyttötapauksen 
  */
-package logiikka;
 
 public class ArvaaKoodi extends Komento {
 

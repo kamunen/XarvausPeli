@@ -1,16 +1,14 @@
 
-/**
- * Pelilauta - luokka sisältää arvattavan koodin ja 
- * Rivi - oliot, joissa arvaus ja tarkistus
- *
- *
- * 
- */
 
 package logiikka;
 
+
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * Pelilauta - luokka sisältää arvattavan koodin ja listan Rivi - olioista
+ */
 
 public class Pelilauta implements java.io.Serializable{
     private int[] arvattavaKoodi;

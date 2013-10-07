@@ -3,7 +3,6 @@ package logiikka;
 
 /**
  * Luokka muuntaa saamansa merkkijonon int - taulukoksi
- * @author KaM
  */
 public class SyoteTaulukoksi {
     private String viesti;

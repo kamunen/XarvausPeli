@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittyma;
 
 /**
- *
- * @author KaM
+ * Tulostaulu - paneeli kaksin peliä varten
  */
+
 public class pnlTulostaulu extends javax.swing.JPanel {
 
     /**

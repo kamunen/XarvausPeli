@@ -1,10 +1,11 @@
 package kayttoliittyma;
 
+import java.util.Scanner;
+import logiikka.Pelilauta;
+
 /**
  * Ohjelman käynnistys
  */
-import java.util.Scanner;
-import logiikka.Pelilauta;
 
 public class XarvausPeli {
 

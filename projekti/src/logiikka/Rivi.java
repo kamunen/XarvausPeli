@@ -3,7 +3,6 @@ package logiikka;
 
 /**
  * Rivi - luokka käsittelee yhden arvauksen ja tarkistaa sen
- * Arvaukset talletetaan pelilauta - luokkaan
  */
 public class Rivi implements java.io.Serializable {
 

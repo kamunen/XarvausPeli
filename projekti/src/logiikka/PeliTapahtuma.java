@@ -1,7 +1,7 @@
 package logiikka;
 
 /**
- * Luokka pelitilnteen tallettamista varten
+ * Luokka pelitilanteen tallettamista varten
  */
 
 public class PeliTapahtuma implements java.io.Serializable {

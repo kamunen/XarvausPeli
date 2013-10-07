@@ -5,6 +5,9 @@ import logiikka.Pelilauta;
 import logiikka.*;
 import tiedosto.Tiedosto;
 
+/**
+ * Pelin tekstipohjainen käyttöliittymä testaustarkoituksiin
+ */
 public class TekstiKaLi {
 
     Scanner lukija;
