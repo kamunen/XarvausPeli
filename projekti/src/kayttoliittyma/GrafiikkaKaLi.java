@@ -1,12 +1,14 @@
-
 package kayttoliittyma;
 
 import java.awt.Component;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import logiikka.ArvaaKoodi;
 import logiikka.Komento;
+import logiikka.PeliTilanne;
 import logiikka.Pelilauta;
 import logiikka.Rivi;
+import logiikka.SyoteTaulukoksi;
 import tiedosto.Tiedosto;
 
 /**
@@ -16,9 +18,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
     private Pelilauta pelilauta;
     private HashMap<String, pnlRivi> pnlRivit;
-    
     private final String TIEDOSTO = "peli.dat";
-    
+    private PeliTilanne pelitilanne = new PeliTilanne();
 
     /**
      * Luo uuden ilmentymän
@@ -28,21 +29,21 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         teeRiviTaulukko();
         aktivoiLatausNappi();
         pnlTulostaulu1.setVisible(false);
-      
-        
-        
+
+
+
     }
-     private void aktivoiLatausNappi() {
-        try{
+
+    private void aktivoiLatausNappi() {
+        try {
             Tiedosto t = new Tiedosto();
             boolean latausMahdollista = t.onkoPelitilanneTallessa(TIEDOSTO);
             bLataaPelitilanne.setEnabled(latausMahdollista);
-           
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            txtInfo.setText("Levyn luku ei onnistu!");
         }
-            catch (Exception e){
-                System.out.println(e.toString());
-                txtInfo.setText("Levyn luku ei onnistu!");
-            }
     }
 
     private void teeRiviTaulukko() {
@@ -184,7 +185,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
                         .addComponent(bArvaa, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(bLataaPelitilanne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bTallennaPelitilanne, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -326,14 +327,12 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
     /**
      *
-     * Koodin arvausnappi
-     * Luetaan käyttäjän valitsema koodi ja tarkistetaan se
+     * Koodin arvausnappi Luetaan käyttäjän valitsema koodi ja tarkistetaan se
      */
-
     private void bArvaaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArvaaActionPerformed
 
         bTallennaPelitilanne.setEnabled(true);
-       
+
         int arvauksiaJaljella = pelilauta.getRivajaJaljella();
         txtInfo.setText("Arvauksia jäljellä : " + (arvauksiaJaljella - 1));
 
@@ -344,12 +343,15 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         if (pelilauta.getOnkoRatkaistu()) {
             koodiLoytyi(pnl);
+            pelitilanne.vaihdaRatkaisijaa();
 
         } else if (!pelilauta.onkoArvauksiaJaljella()) {
             arvauksetKaytetty(pnl);
+            pelitilanne.vaihdaRatkaisijaa();
 
         } else {
             jatkaPelia(pnl);
+              pelitilanne.lisaaPisteVastustajalle();
         }
 
     }//GEN-LAST:event_bArvaaActionPerformed
@@ -360,6 +362,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         bTallennaPelitilanne.setEnabled(false);
         pnl.aktiivinen(false);
         pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), true);
+
     }
 
     private void arvauksetKaytetty(pnlRivi pnl) {
@@ -382,10 +385,11 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         pnl.asetaTarkistus(r, rbHelppoVersio.isSelected());
         pnl.aktiivinen(false);
-        
+
         pnl = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
         pnl.asetaRivi(r, false, false);
         pnl.aktiivinen(true);
+      
     }
 
     /**
@@ -401,6 +405,37 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         pelilauta = new Pelilauta(koodinPituus, eriValintojenLkm, arvaustenMaxLkm);
 
+        // Jos on valittu kaksinpeli niin kysytään arvattava koodi käyttäjältä
+        if (rbKaksinpeli.isSelected()) {
+            String viesti = "Syötä arvattava koodi";
+            String otsake = "PELAAJA " + pelitilanne.annaKoodinAsettaja();
+            SyoteTaulukoksi st = new SyoteTaulukoksi();
+            st.setMaxNro(eriValintojenLkm-1);
+
+            String syote = JOptionPane.showInputDialog(this, viesti, otsake, JOptionPane.PLAIN_MESSAGE);
+
+            while (true) {
+
+                //Koodi OK
+                if (st.validoiSyote(syote, 4)) {
+                    break;
+                }
+
+                //Cancel
+                if (syote == null) {
+                    return;
+                }
+
+                viesti = st.getViesti();
+                syote = JOptionPane.showInputDialog(this, viesti, otsake, JOptionPane.PLAIN_MESSAGE);
+
+            }
+
+            pelilauta.setKoodi(st.getKoodi());
+
+        }
+
+
         txtInfo.setText("");
         bArvaa.setEnabled(true);
 
@@ -410,7 +445,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         }
         pnlRivi r = annaPaneliNimella("pnlRivi" + arvaustenMaxLkm);
         r.aktiivinen(true);
-         txtInfo.setText("Arvauksia jäljellä : " + (arvaustenMaxLkm));
+        txtInfo.setText("P#" + pelitilanne.annaKoodinRatkaisija() + " Arvauksia jäljellä : " + (arvaustenMaxLkm));
 
     }//GEN-LAST:event_bAloitaActionPerformed
 
@@ -420,15 +455,14 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
     private void bTallennaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTallennaPelitilanneActionPerformed
         Tiedosto t = new Tiedosto();
-        try{
+        try {
             t.talletaPeli(TIEDOSTO, pelilauta);
             txtInfo.setText("Pelitilanne talletettu");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             txtInfo.setText("Tallennus ei onnistu!");
         }
-       
+
     }//GEN-LAST:event_bTallennaPelitilanneActionPerformed
 
     private void bLataaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLataaPelitilanneActionPerformed
@@ -449,7 +483,7 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
             }
             pnlRivi r = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
-            r.asetaRivi(pelilauta.annaViimeisinRivi(),rbHelppoVersio.isSelected(),false);
+            r.asetaRivi(pelilauta.annaViimeisinRivi(), rbHelppoVersio.isSelected(), false);
             r.aktiivinen(true);
 
 
@@ -469,24 +503,26 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
             System.out.println(e.toString());
             txtInfo.setText("Lataus ei onnistunut!");
         }
-        
+
         //Kun lataus onnistuu niin poistetaan faili, ettei voi ladata uudelleen
-        
+
         try {
             t.poistaTiedosto(TIEDOSTO);
         } catch (Exception e) {
             System.out.println(e.toString());
             txtInfo.setText("Ongelma! ");
         }
-        
+
     }//GEN-LAST:event_bLataaPelitilanneActionPerformed
 
     private void rbKaksinpeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKaksinpeliActionPerformed
         pnlTulostaulu1.setVisible(true);
+
+
     }//GEN-LAST:event_rbKaksinpeliActionPerformed
 
     private void rbYksinpeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbYksinpeliActionPerformed
-         pnlTulostaulu1.setVisible(false);
+        pnlTulostaulu1.setVisible(false);
     }//GEN-LAST:event_rbYksinpeliActionPerformed
 
     public void kaynnista() {
@@ -552,6 +588,4 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbYksinpeli;
     private javax.swing.JTextField txtInfo;
     // End of variables declaration//GEN-END:variables
-
-   
 }
