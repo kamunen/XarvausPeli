@@ -14,12 +14,11 @@ public class PeliTilanne {
     
     private int[] tilanne;
     private int koodinRatkaisija;
+    private boolean kaksinpeli;
     
     public PeliTilanne(){
         tilanne = new int[3];
-        tilanne[0]=1;
         koodinRatkaisija=1;
-        
     }
     
     public void lisaaPisteVastustajalle(){
@@ -38,7 +37,19 @@ public class PeliTilanne {
     }
     
     public void lisaaKierros(){
-        getTilanne()[0]++;
+        //Kierros vaihtuu kun kaksi peliä on pelattu
+        if (koodinRatkaisija==1){
+        tilanne[0]++;    
+        }
+        
+    }
+    
+    public void nollaa(){
+        tilanne[0]=0;
+        tilanne[1]=0;
+        tilanne[2]=0;
+        koodinRatkaisija=1;
+        setKaksinpeli(true);
     }
 
     /**
@@ -61,6 +72,20 @@ public class PeliTilanne {
         } else{
             return 1;
         } 
+    }
+
+    /**
+     * @return the kaksinpeli
+     */
+    public boolean isKaksinpeli() {
+        return kaksinpeli;
+    }
+
+    /**
+     * @param kaksinpeli the kaksinpeli to set
+     */
+    public void setKaksinpeli(boolean kaksinpeli) {
+        this.kaksinpeli = kaksinpeli;
     }
     
             

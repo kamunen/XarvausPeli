@@ -1,6 +1,7 @@
 package kayttoliittyma;
 
 import java.awt.Component;
+import java.awt.HeadlessException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import logiikka.ArvaaKoodi;
@@ -20,6 +21,8 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     private HashMap<String, pnlRivi> pnlRivit;
     private final String TIEDOSTO = "peli.dat";
     private PeliTilanne pelitilanne = new PeliTilanne();
+    
+    private int eriValintojenLkm;
 
     /**
      * Luo uuden ilmentymän
@@ -343,16 +346,19 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
 
         if (pelilauta.getOnkoRatkaistu()) {
             koodiLoytyi(pnl);
+            JOptionPane.showMessageDialog(this,"Oikein!");
             pelitilanne.vaihdaRatkaisijaa();
-
+           
         } else if (!pelilauta.onkoArvauksiaJaljella()) {
             arvauksetKaytetty(pnl);
             pelitilanne.vaihdaRatkaisijaa();
 
         } else {
             jatkaPelia(pnl);
-              pelitilanne.lisaaPisteVastustajalle();
+            pelitilanne.lisaaPisteVastustajalle();
         }
+
+        pnlTulostaulu1.paivita(pelitilanne.getTilanne());
 
     }//GEN-LAST:event_bArvaaActionPerformed
 
@@ -372,12 +378,18 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         for (int i : koodi) {
             sb.append(i);
         }
+        String viesti = "Arvaukset käytetty. Oikea koodi : " + sb.toString();
+         JOptionPane.showMessageDialog(this,viesti);
         System.out.println("");
-        txtInfo.setText("Arvaukset käytetty. Oikea koodi : " + sb.toString());
+        txtInfo.setText(viesti);
         bArvaa.setEnabled(false);
         bTallennaPelitilanne.setEnabled(false);
         pnl.aktiivinen(false);
         pnl.asetaTarkistus(pelilauta.annaViimeisinRivi(), true);
+
+        pelitilanne.lisaaPisteVastustajalle();
+        pelitilanne.lisaaPisteVastustajalle();
+        pnlTulostaulu1.paivita(pelitilanne.getTilanne());
     }
 
     private void jatkaPelia(pnlRivi pnl) {
@@ -389,7 +401,29 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         pnl = annaPaneliNimella("pnlRivi" + pelilauta.getRivajaJaljella());
         pnl.asetaRivi(r, false, false);
         pnl.aktiivinen(true);
-      
+
+    }
+
+    private boolean kysyKoodi() throws HeadlessException {
+        String viesti = "Syötä arvattava koodi";
+        String otsake = "PELAAJA " + pelitilanne.annaKoodinAsettaja();
+        SyoteTaulukoksi st = new SyoteTaulukoksi();
+        st.setMaxNro(eriValintojenLkm - 1);
+        String syote = JOptionPane.showInputDialog(this, viesti, otsake, JOptionPane.PLAIN_MESSAGE);
+        while (true) {
+            //Koodi OK
+            if (st.validoiSyote(syote, 4)) {
+                break;
+            }
+            //Cancel
+            if (syote == null) {
+                return false;
+            }
+            viesti = st.getViesti();
+            syote = JOptionPane.showInputDialog(this, viesti, otsake, JOptionPane.PLAIN_MESSAGE);
+        }
+        pelilauta.setKoodi(st.getKoodi());
+        return true;
     }
 
     /**
@@ -397,42 +431,22 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
      *
      */
     private void bAloitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAloitaActionPerformed
-        int eriValintojenLkm;
         int koodinPituus = 4;
         int arvaustenMaxLkm = 10;
 
         eriValintojenLkm = Integer.parseInt(cbxVaihtoehtoja.getSelectedItem().toString());
 
         pelilauta = new Pelilauta(koodinPituus, eriValintojenLkm, arvaustenMaxLkm);
+        pelitilanne.lisaaKierros();
+        pnlTulostaulu1.paivita(pelitilanne.getTilanne());
 
         // Jos on valittu kaksinpeli niin kysytään arvattava koodi käyttäjältä
         if (rbKaksinpeli.isSelected()) {
-            String viesti = "Syötä arvattava koodi";
-            String otsake = "PELAAJA " + pelitilanne.annaKoodinAsettaja();
-            SyoteTaulukoksi st = new SyoteTaulukoksi();
-            st.setMaxNro(eriValintojenLkm-1);
-
-            String syote = JOptionPane.showInputDialog(this, viesti, otsake, JOptionPane.PLAIN_MESSAGE);
-
-            while (true) {
-
-                //Koodi OK
-                if (st.validoiSyote(syote, 4)) {
-                    break;
-                }
-
-                //Cancel
-                if (syote == null) {
-                    return;
-                }
-
-                viesti = st.getViesti();
-                syote = JOptionPane.showInputDialog(this, viesti, otsake, JOptionPane.PLAIN_MESSAGE);
-
+            if (!kysyKoodi()) {
+                pelitilanne.nollaa();
+                pnlTulostaulu1.paivita(pelitilanne.getTilanne());
+                return;
             }
-
-            pelilauta.setKoodi(st.getKoodi());
-
         }
 
 
@@ -445,12 +459,13 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
         }
         pnlRivi r = annaPaneliNimella("pnlRivi" + arvaustenMaxLkm);
         r.aktiivinen(true);
-        txtInfo.setText("P#" + pelitilanne.annaKoodinRatkaisija() + " Arvauksia jäljellä : " + (arvaustenMaxLkm));
+        txtInfo.setText(" Arvauksia jäljellä : " + (arvaustenMaxLkm));
 
     }//GEN-LAST:event_bAloitaActionPerformed
 
     private void rbHelppoVersioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHelppoVersioActionPerformed
         rbHelppoVersio.setSelected(true);
+        
     }//GEN-LAST:event_rbHelppoVersioActionPerformed
 
     private void bTallennaPelitilanneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTallennaPelitilanneActionPerformed
@@ -516,13 +531,16 @@ public class GrafiikkaKaLi extends javax.swing.JFrame {
     }//GEN-LAST:event_bLataaPelitilanneActionPerformed
 
     private void rbKaksinpeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbKaksinpeliActionPerformed
+        pelitilanne.nollaa();
+        pnlTulostaulu1.paivita(pelitilanne.getTilanne());
         pnlTulostaulu1.setVisible(true);
-
+        pelitilanne.setKaksinpeli(true);
 
     }//GEN-LAST:event_rbKaksinpeliActionPerformed
 
     private void rbYksinpeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbYksinpeliActionPerformed
         pnlTulostaulu1.setVisible(false);
+        pelitilanne.setKaksinpeli(false);
     }//GEN-LAST:event_rbYksinpeliActionPerformed
 
     public void kaynnista() {

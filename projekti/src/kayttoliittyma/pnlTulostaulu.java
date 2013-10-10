@@ -12,6 +12,12 @@ public class pnlTulostaulu extends javax.swing.JPanel {
     public pnlTulostaulu() {
         initComponents();
     }
+    
+    public void paivita(int[] tilanne){
+        txtKierros.setText(""+tilanne[0]);
+        txtPelaaja1Tulos.setText(""+tilanne[1]);
+        txtPelaaja2Tulos.setText(""+tilanne[2]);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +34,6 @@ public class pnlTulostaulu extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtPelaaja1Tulos = new javax.swing.JTextField();
         txtPelaaja2Tulos = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Tulostaulu"));
 
@@ -56,8 +61,6 @@ public class pnlTulostaulu extends javax.swing.JPanel {
         txtPelaaja2Tulos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPelaaja2Tulos.setText("0");
 
-        jLabel4.setText("EI OLE TOTEUTETTU");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,16 +70,11 @@ public class pnlTulostaulu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtPelaaja1Tulos)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtKierros)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
-                .addGap(32, 32, 32)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtKierros))
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtPelaaja2Tulos))
@@ -102,16 +100,12 @@ public class pnlTulostaulu extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPelaaja1Tulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtKierros;
     private javax.swing.JTextField txtPelaaja1Tulos;
     private javax.swing.JTextField txtPelaaja2Tulos;
