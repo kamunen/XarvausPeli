@@ -6,9 +6,21 @@ package logiikka;
  */
 public class Rivi implements java.io.Serializable {
 
+    /**
+     * Pelaajan tekemä arvaus
+     */
     private int[] arvaus;
+    /**
+     * Tarkistuksen tulos
+     */
     private char[] tulos;
+    /**
+     * Oikeiden lukumäärä
+     */
     private int oikeinLkm;
+    /**
+     * Lukumäärä oikeista merkeistä, jotka väärällä paikalla
+     */
     private int mukanaLkm;
     
     public static final char LOYDETTY = 'X';

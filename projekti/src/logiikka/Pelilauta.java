@@ -11,9 +11,21 @@ import java.util.Random;
  */
 
 public class Pelilauta implements java.io.Serializable{
+    /**
+     * Taulukko, jossa arvattava koodi
+     */
     private int[] arvattavaKoodi;
+    /**
+     * Ratkaisijan ehdottamat rivit
+     */
     private ArrayList<Rivi> rivit;
+    /**
+     * pelin loppumisen havainnointi
+     */
     private PeliTapahtuma peliTapahtuma;
+    /**
+     * Yhden merkin vaihtoehtojen luumäärä
+     */
     private int vaihtoehtojenLkm;
     
 /*

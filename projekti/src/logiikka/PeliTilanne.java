@@ -6,14 +6,23 @@ package logiikka;
  */
 public class PeliTilanne {
     
-    // Taulukko, joka sisältää kierroksen nimeron
-    // ja pelaajien pisteet
-    // tilanne[0] = kierroksen numero
-    // tilanne[1] = Pelaaja1 pisteet
-    // tilanne[2] = Pelaaja2 pisteet
+    /**
+     *  Taulukko, joka sisältää kierroksen nimeron
+    * ja pelaajien pisteet
+     *tilanne[0] = kierroksen numero
+     *tilanne[1] = Pelaaja1 pisteet
+     *tilanne[2] = Pelaaja2 pisteet
+    
+     */
     
     private int[] tilanne;
+    /**
+     * Ilmaisee kumpi pelaajista on ratkaisuvuoross
+     */
     private int koodinRatkaisija;
+    /**
+     * Ilmaisee että kyseessä kaksinpeli
+     */
     private boolean kaksinpeli;
     
     public PeliTilanne(){
@@ -21,6 +30,9 @@ public class PeliTilanne {
         koodinRatkaisija=1;
     }
     
+    /**
+     * Lisää pisteen ratkaisijan vastapelaajalle
+     */
     public void lisaaPisteVastustajalle(){
         if(annaKoodinRatkaisija()==1){
             getTilanne()[2]++;
@@ -28,6 +40,10 @@ public class PeliTilanne {
             getTilanne()[1]++;
         }
     }
+    
+    /**
+     * Vaihtaa koodin ratkaisija muuttujan arvon
+     */
     public void vaihdaRatkaisijaa(){
         if(koodinRatkaisija==1){
             koodinRatkaisija=2;
@@ -35,15 +51,21 @@ public class PeliTilanne {
             koodinRatkaisija=1;
         }
     }
-    
+    /*
+     * Kasvattaa kierroslaskuria
+     * Kierros vaihtuu kun kaksi peliä on pelattu
+     */
     public void lisaaKierros(){
-        //Kierros vaihtuu kun kaksi peliä on pelattu
+        
         if (koodinRatkaisija==1){
         tilanne[0]++;    
         }
         
     }
     
+    /**
+     * Asettaa taulukon tilanne alkiot nolliksi
+     */
     public void nollaa(){
         tilanne[0]=0;
         tilanne[1]=0;
@@ -66,6 +88,10 @@ public class PeliTilanne {
         return koodinRatkaisija;
     }
     
+    /**
+     * Palauttaa koodin asettajan numeron
+     * @return 1 tai 2
+     */
     public int annaKoodinAsettaja(){
         if(annaKoodinRatkaisija()==1){
            return 2;

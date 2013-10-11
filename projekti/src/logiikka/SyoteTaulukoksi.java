@@ -5,8 +5,17 @@ package logiikka;
  * Luokka muuntaa saamansa merkkijonon int - taulukoksi
  */
 public class SyoteTaulukoksi {
+    /**
+     * Virheilmoituksen teksti
+     */
     private String viesti;
+    /**
+     * Syötteestä kasattu taulukko
+     */
     private int[] koodi;
+    /**
+     * Suurin sallittu numero syötteessä
+     */
     private int maxNro;
     
     public SyoteTaulukoksi(){

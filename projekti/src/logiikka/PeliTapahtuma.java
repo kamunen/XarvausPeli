@@ -6,7 +6,13 @@ package logiikka;
 
 public class PeliTapahtuma implements java.io.Serializable {
 
+    /**
+     * jäljellä olevien rivien määrä
+     */
     private int rivejaJaljella;
+    /**
+     * ilmaisee onko koodi ratkaistu
+     */
     private boolean onkoRatkaistu;
 
     public PeliTapahtuma() {
