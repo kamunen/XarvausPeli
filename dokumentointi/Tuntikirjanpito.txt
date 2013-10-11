@@ -5,6 +5,7 @@ Yhteensä 71 tuntia
 
 ### Viikko 41
 
+Pe 10.10 2h (D) Käyttöohjeen kirjoitus
 Pe 11.10 2h (D) JavaDoc, RakenneDokumentin päivitys
 To 10.10 5h (K) Kaksinpelin koodausta
 Ti 08.10 2h (S) Kaksinpelin syyhyttelyä
