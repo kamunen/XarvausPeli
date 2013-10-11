@@ -1,0 +1,39 @@
+Harjoitustyöhön käytetty aika jaoteltuna seuraaviin luokkiin :
+
+
+Yhteensä 71 tuntia
+
+### Viikko 41
+
+Pe 11.10 2h (D) JavaDoc, RakenneDokumentin päivitys
+To 10.10 5h (K) Kaksinpelin koodausta
+Ti 08.10 2h (S) Kaksinpelin syyhyttelyä
+   
+------
+### Viikko 40   
+Ke 02.10 3h (D) Tehty Käyttötapauskaavio ja 2 sekvenssikaaviota        
+Ti 01.10 3h (K) Tehty Tallennus / Lataustoiminto.      
+Ma 30.09 3h (S) Korjattu koodikatselmoinnissa esille tulleita bugeja.    
+### Viikko 39
+Ke 25.09 2h (D) Tarkennettu luokkakaavio ja yksi sekvenssikaavio    
+Ti 24.09 2h (D) Aihekuvaus ja rakenne dokumentin kirjoitus. 
+Ti 24.09 7h (K) Käyttöliittymän toiminnallisuutta   
+Ma 23.09 2h (D) JavaDoc kokeiluja ja koodin kommentointia    
+Ma 23.09 1h (K) Koodin siistimistä ja lisätoiminnllisuuden hahmottelua    
+### Viikko 38     
+Ma 16.09 1h (D) Luokkien lisäys luokkakaavioon    
+Ma 16.09 4h (K) Graafisen käyttöliittymän kokeiluja
+### Viikko 37 
+Ke 11.09 4h (K) Arvaustoiminto valmis. Testikäyttöön tekstikäyttöliittymä.    
+Ti 10.09 2h (K) Testien tekoa (RiviTest, PelilautaTest)      
+Ma 09.09 1h (D) Alustavan luokkakaavion viimeistely      
+Ma 09.09 3h (K) Perustoiminnallisuus (ArvaaKoodi, Pelilauta, Rivi) 
+
+--
+### Viikko 35 - 36
+La 07.09 4h (K) Tarkistusrutiinin pähkäilyä    
+Ke 04.09 4h (S) Luokkakaavion suunnittelua ja googlausta miten pelitilanne saadaan levylle (Serializable vaikuttaa olevan taikasana)     
+Ti 03.09 2h (S)  Aloitusluento   
+Ti 03.09 2h (S)  GIT Wikin - säätöä     
+Su 01.09 5h (D) Aiheen määrittely   
+La 31.08 5h (S) GIT harjoittelua    
